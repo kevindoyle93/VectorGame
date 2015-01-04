@@ -1,13 +1,12 @@
-float centX, centY;
+PVector centre;
 
 void setup()
 {
   size(900, 500);
   
-  centX = width / 2;
-  centY = height / 2;
+  centre = new PVector(width / 2, height / 2);
   
-  hud = new HUD(centX, centY);
+  hud = new HUD(centre.x, centre.y);
 }
 
 HUD hud;

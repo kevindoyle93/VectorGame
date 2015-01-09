@@ -4,13 +4,11 @@ class HUD
   
   PVector points[];
   
-  float centX, centY;
+  PVector centre;
  
   HUD(float centX, float centY)
   {
-    this.centX = centX;
-    
-    this.centY = centY;
+    centre = new PVector(centX, centY);
     
     points = new PVector[numPoints];
     
@@ -54,6 +52,31 @@ class HUD
     line(points[3].x, points[3].y, points[6].x, points[6].y);
     line(points[10].x, points[10].y, points[7].x, points[7].y);
     line(points[14].x, points[14].y, points[11].x, points[11].y);
+    
+    crosshair();
+  }
+  
+  void crosshair()
+  {
+    float radius = width / 100;
+    float theta = TWO_PI / 8;
+    float points = 4;
+    float thetaSpace = TWO_PI / points;
+
+    
+    fill(127);
+    stroke(127);
+    
+    for(int i = 0; i < points; i++)
+    {
+      float x = centre.x + sin(theta) * radius;
+      float y = centre.y + cos(theta) * radius;
+      
+      line(centre.x, centre.y, x, y);
+      
+      theta += thetaSpace;
+    }
+    
   }
  
 }

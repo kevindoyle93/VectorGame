@@ -12,31 +12,38 @@ class Bullet {
   
   boolean left;
   
-  float theta;
-  
   float speed;
   
   boolean alive;
   
-  Bullet(float gunX, float gunY, boolean left) {
+  Bullet(boolean left) {
     
-    startPoint = new PVector(gunX, gunY);
+    if(left) {
+      
+      startPoint = new PVector(hud.points[15].x, centre.y);
+    
+      movement = new PVector(1, 0);
+      
+    }
+    else {
+      
+      startPoint = new PVector(hud.points[6].x, centre.y);
+    
+      movement = new PVector(-1, 0);
+      
+    }
     
     endPoint = new PVector(startPoint.x, startPoint.y);
     
-    movement = new PVector(0, 0);
-    
-    l = width / 20;
+    l = width / 20.0f;
     
     alive = true;
     
     this.left = left;
     
-    speed = 10;
+    speed = 10.0f;
     
-    theta = calculateTheta();
-    
-    calculateMovement();
+    lDec = 0.1f;
     
   }
   
@@ -45,10 +52,17 @@ class Bullet {
     stroke(255, 0, 0);
     fill(255, 0, 0);
     
-    endPoint.x = startPoint.x + sin(theta) * l;
-    endPoint.y = startPoint.y + -cos(theta) * l;
+    if(left) {
+      
+      endPoint.x = startPoint.x + l;
+    }
+    else {
+      
+      endPoint.x = startPoint.x - l;
+    }
     
     line(startPoint.x, startPoint.y, endPoint.x, endPoint.y);
+    
   }
   
   void update() {
@@ -61,52 +75,30 @@ class Bullet {
     
     l -= lDec;
     
-    if(endPoint.x > width / 2) {
+    if(left) {
       
-      alive = !alive;
-    }
-    
-    if(!alive) {
+      if(endPoint.x > width / 2) {
+        
+        alive = !alive;
+      }
       
-      bullets.remove(this);
+      if(!alive) {
+        
+        bullets.remove(this);
+      }
+    }
+    else {
+      
+      if(endPoint.x < width / 2) {
+        
+        alive = !alive;
+      }
+      
+      if(!alive) {
+        
+        bullets.remove(this);
+      }
     }
   }
   
-  float calculateTheta() {
-    
-    float aSquared;
-    float sinRet;
-    float a, b, c;
-    float ret;
-    
-    b = width * 0.45;
-    c = height * 0.3;
-   
-    aSquared = (sq(b)) + (sq(c)) - (2 * b * c * cos(PI / 2));
-    
-    a = sqrt(aSquared);
-    
-    calculateLDec(a);
-    
-    sinRet = (sin(PI / 2) * b) / a;
-    
-    ret = asin(sinRet);
-    
-    return ret;
-  }
-  
-  void calculateMovement() {
-    
-    float angle = PI / 2 - theta;
-    
-    movement.x = (speed * sin(angle)) / sin(PI / 2);
-    movement.y = -((movement.x * sin(angle)) / sin(PI / 2));
-    
-  }
-  
-  void calculateLDec(float a) {
-    
-    lDec = (a / 60) / (speed * 2);
-    
-  }
 }

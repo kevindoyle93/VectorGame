@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>260</x>
+      <y>30</y>
+      <w>210</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>Gun
+--
+PVector centre
+float section1Length
+float section1Width
+float section2Length
+float section2Length
+float perspective
+int ammo
+--
+display()
+update()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>30</x>
+      <y>30</y>
+      <w>210</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>Bullet
+--
+PVector startPoint
+float length
+int life
+--
+display()
+update()
+checkCollision()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>490</x>
+      <y>30</y>
+      <w>210</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>Player
+--
+int health
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

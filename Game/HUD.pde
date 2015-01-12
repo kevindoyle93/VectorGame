@@ -39,6 +39,14 @@ class HUD {
   
   void display() {
     
+    stroke(0);
+    fill(0);
+    
+    rect(0, 0, width, points[15].y);
+    rect(0, points[14].y, width, height);
+    rect(0, 0, points[14].x, height);
+    rect(points[6].x, 0, width, height);
+    
     stroke(255);
     
     for(int i = 0; i < points.length; i++) {

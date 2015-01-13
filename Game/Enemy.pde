@@ -22,6 +22,8 @@ class Enemy {
   
   boolean loaded;
   
+  boolean targeted;
+  
   Enemy() {
     
     maxDist = width / 200;
@@ -30,7 +32,7 @@ class Enemy {
     
     cent = new PVector(random(width * 0.2, width * 0.8), random(height * 0.3, height * 0.7));
     
-    size = random(maxDist, minDist);
+    size = maxDist;
     
     speed = 0.25f;
     
@@ -56,9 +58,12 @@ class Enemy {
     fill(0);
     stroke(0);
     
-    //rect(cent.x - size * 1.5, cent.y - size / 2, size * 3, size);
-    
-    stroke(255);
+    if(targeted) {
+      stroke(236, 93, 78);
+    }
+    else {  
+      stroke(255);
+    }
     
     rect(cent.x - size / 2, cent.y - size / 2, size, size);
     
@@ -77,6 +82,10 @@ class Enemy {
   }
   
   void update() {
+    
+    checkTargeted();
+    
+    //size = minDist;
     
     if(size > (minDist - speed)) {
       
@@ -163,6 +172,21 @@ class Enemy {
       coolDown = 0;
       
     }
+  }
+  
+  void checkTargeted() {
+    
+    if(centre.x > cent.x - size / 2 && centre.x < cent.x + size / 2 && centre.y > cent.y - size / 2 && centre.y < cent.y + size / 2) {
+      
+      targeted = true;
+      
+    }
+    else {
+      
+      targeted = false;
+      
+    }
+    
   }
   
 }

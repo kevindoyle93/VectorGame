@@ -1,6 +1,8 @@
 class Bullet {
   
-  PVector startPoint;    // The start point will be passed by the Gun
+  PVector startPoint;
+  
+  PVector dest;
   
   PVector endPoint;
   
@@ -8,7 +10,11 @@ class Bullet {
   
   float l;
   
+  PVector len;
+  
   float lDec;
+  
+  float theta;
   
   boolean left;
   
@@ -18,32 +24,38 @@ class Bullet {
   
   Bullet(boolean left) {
     
+    speed = 15.0f;
+    
     if(left) {
       
       startPoint = new PVector(hud.points[15].x, centre.y);
     
-      movement = new PVector(1, 0);
+      movement = new PVector(speed, 0);
       
     }
     else {
       
       startPoint = new PVector(hud.points[6].x, centre.y);
     
-      movement = new PVector(-1, 0);
+      movement = new PVector(-speed, 0);
       
     }
+    
+    dest = new PVector(centre.x, centre.y);
     
     endPoint = new PVector(startPoint.x, startPoint.y);
     
     l = width / 20.0f;
     
+    len = new PVector(l, 0);
+    
     alive = true;
     
     this.left = left;
     
-    speed = 10.0f;
+    lDec = speed / 10.0f;
     
-    lDec = 0.1f;
+    theta = PI;
     
   }
   
@@ -71,13 +83,19 @@ class Bullet {
     // Move along that line, decreasing the length of the bullet as it goes
     // Change alive to false if you it hits an enemy or dies
     
+    calculateMovement();
+    
     startPoint.add(movement);
     
-    l -= lDec;
+    if(l > lDec) {
+      
+      l -= lDec;
+      
+    }
     
     if(left) {
       
-      if(endPoint.x > width / 2) {
+      if(endPoint.x > (width / 2 - speed / 2)) {
         
         alive = !alive;
       }
@@ -89,7 +107,7 @@ class Bullet {
     }
     else {
       
-      if(endPoint.x < width / 2) {
+      if(endPoint.x < (width / 2 + speed / 2)) {
         
         alive = !alive;
       }
@@ -99,6 +117,96 @@ class Bullet {
         bullets.remove(this);
       }
     }
+    
+    checkCollision();
+    
+  }
+  
+  
+  void calculateMovement() {
+    
+    
+  }
+  
+  
+  void checkCollision() {
+    
+    if(check1()) {
+      
+      background(255);
+      bullets.remove(this);
+      
+    }
+  }
+  
+  boolean check1() {
+    
+    boolean ret;
+    
+    for(int i = 0; i < enemies.size(); i++) {
+      
+      if(enemies.get(i).targeted) {
+    
+        if(left) {
+          
+          if(endPoint.x > (enemies.get(i).cent.x - (enemies.get(i).size * 1.5))) {
+            
+            ret = check2(i);
+            return ret;
+            
+          }
+        }
+      
+        else {
+          
+          if(endPoint.x < (enemies.get(i).cent.x + (enemies.get(i).size * 1.5))) {
+            
+            ret = true;
+            return ret;
+          
+          }
+        
+        }
+        
+      }
+    }
+    
+    ret = false;
+    return ret;
+    
+  }
+  
+  
+  boolean check2(int i) {
+    
+    boolean ret;
+    
+    if(endPoint.y > (enemies.get(i).cent.y - (enemies.get(i).size / 2))) {
+      
+      ret = check3(i);
+      return ret;
+      
+    }
+    
+    ret = false;
+    return ret;
+    
+  }
+  
+  boolean check3(int i) {
+    
+    boolean ret;
+    
+    if(endPoint.y < (enemies.get(i).cent.y + (enemies.get(i).size / 2))) {
+      
+      ret = true;
+      return ret;
+      
+    }
+    
+    ret = false;
+    return ret;
+    
   }
   
 }

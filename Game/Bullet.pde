@@ -1,5 +1,7 @@
 class Bullet {
   
+  PVector origin;
+  
   PVector startPoint;
   
   PVector dest;
@@ -24,18 +26,22 @@ class Bullet {
   
   Bullet(boolean left) {
     
-    speed = 15.0f;
+    speed = 20.0f;
     
     if(left) {
       
-      startPoint = new PVector(hud.points[15].x, centre.y);
+      origin = new PVector(hud.points[15].x, centre.y);
+      
+      startPoint = origin.get();
     
       movement = new PVector(speed, 0);
       
     }
     else {
       
-      startPoint = new PVector(hud.points[6].x, centre.y);
+      origin = new PVector(hud.points[6].x, centre.y);
+      
+      startPoint = origin.get();
     
       movement = new PVector(-speed, 0);
       
@@ -43,7 +49,7 @@ class Bullet {
     
     dest = new PVector(centre.x, centre.y);
     
-    endPoint = new PVector(startPoint.x, startPoint.y);
+    endPoint = startPoint.get();
     
     l = width / 20.0f;
     
@@ -95,7 +101,7 @@ class Bullet {
     
     if(left) {
       
-      if(endPoint.x > (width / 2 - speed / 2)) {
+      if(endPoint.x > dest.x) {
         
         alive = !alive;
       }
@@ -107,7 +113,7 @@ class Bullet {
     }
     else {
       
-      if(endPoint.x < (width / 2 + speed / 2)) {
+      if(endPoint.x < dest.x) {
         
         alive = !alive;
       }
@@ -133,7 +139,6 @@ class Bullet {
     
     if(check1()) {
       
-      background(255);
       bullets.remove(this);
       
     }
@@ -152,6 +157,9 @@ class Bullet {
           if(endPoint.x > (enemies.get(i).cent.x - (enemies.get(i).size * 1.5))) {
             
             ret = check2(i);
+              
+            enemies.get(i).alive = !ret;
+            
             return ret;
             
           }
@@ -161,9 +169,12 @@ class Bullet {
           
           if(endPoint.x < (enemies.get(i).cent.x + (enemies.get(i).size * 1.5))) {
             
-            ret = true;
+            ret = check2(i);
+              
+            enemies.get(i).alive = !ret;
+            
             return ret;
-          
+            
           }
         
         }

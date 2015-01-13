@@ -24,13 +24,17 @@ class Enemy {
   
   boolean targeted;
   
+  boolean alive;
+  
   Enemy() {
+    
+    alive = true;
     
     maxDist = width / 200;
     
     minDist = width / 25;
     
-    cent = new PVector(random(width * 0.2, width * 0.8), random(height * 0.3, height * 0.7));
+    cent = new PVector(random(width * 0.4, width * 0.6), random(height * 0.4, height * 0.6));
     
     size = maxDist;
     
@@ -82,6 +86,12 @@ class Enemy {
   }
   
   void update() {
+    
+    if(!alive) {
+      
+      enemies.remove(this);
+      
+    }
     
     checkTargeted();
     

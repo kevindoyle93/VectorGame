@@ -24,6 +24,8 @@ class Enemy {
   
   boolean targeted;
   
+  boolean lockedOn;
+  
   boolean alive;
   
   Enemy() {

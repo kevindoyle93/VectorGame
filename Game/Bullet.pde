@@ -24,6 +24,8 @@ class Bullet {
   
   boolean alive;
   
+  boolean onTarget;
+  
   Bullet(boolean left) {
     
     speed = 15.0f;
@@ -62,6 +64,8 @@ class Bullet {
     lDec = speed / 10.0f;
     
     theta = PI;
+    
+    checkTarget();
     
   }
   
@@ -150,7 +154,7 @@ class Bullet {
     
     for(int i = 0; i < enemies.size(); i++) {
       
-      if(enemies.get(i).targeted) {
+      if(enemies.get(i).lockedOn) {
     
         if(left) {
           
@@ -217,6 +221,22 @@ class Bullet {
     
     ret = false;
     return ret;
+    
+  }
+  
+  void checkTarget() {
+    
+    for(int i = 0; i < enemies.size(); i++) {
+      
+      if(enemies.get(i).targeted) {
+        
+        enemies.get(i).lockedOn = true;
+        
+        break;
+        
+      }
+      
+    }
     
   }
   

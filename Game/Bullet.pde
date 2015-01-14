@@ -26,7 +26,7 @@ class Bullet {
   
   Bullet(boolean left) {
     
-    speed = 20.0f;
+    speed = 15.0f;
     
     if(left) {
       
@@ -51,7 +51,7 @@ class Bullet {
     
     endPoint = startPoint.get();
     
-    l = width / 20.0f;
+    l = width / 30.0f;
     
     len = new PVector(l, 0);
     

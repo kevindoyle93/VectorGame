@@ -43,7 +43,7 @@ class Player {
         , buttonNameToKey(xml, "button2")
         );
         
-        speed = 2.0f;
+        speed = 4.0f;
         
         gameUp = new PVector(0, -speed);
         gameDown = new PVector(0, speed);

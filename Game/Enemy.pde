@@ -38,7 +38,7 @@ class Enemy {
     
     size = maxDist;
     
-    speed = 0.25f;
+    speed = 0.5f;
     
     move = new PVector[8];
     
@@ -89,13 +89,14 @@ class Enemy {
     
     if(!alive) {
       
+      // Put something here as a destroyed animation. Like the separate lines falling apart or something
+      
       enemies.remove(this);
       
     }
     
     checkTargeted();
     
-    //size = minDist;
     
     if(size > (minDist - speed)) {
       
@@ -106,7 +107,7 @@ class Enemy {
       
     }
     
-    if(count >= 30) {
+    if(count >= 60) {
       
       rand = (int)random(0, 20);
       

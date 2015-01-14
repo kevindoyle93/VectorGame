@@ -1,6 +1,6 @@
 PVector centre;
 boolean[] keys = new boolean[526];
-Player player1;
+Player p;
 
 void setup() {
   

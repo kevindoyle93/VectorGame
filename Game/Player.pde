@@ -17,10 +17,16 @@ class Player {
   char start;
   char button1;
   char button2;
+  char north;
+  char south;
+  char east;
+  char west;
+  char button3;
+  char button4;
   
   PVector gameUp, gameDown, gameLeft, gameRight;
   
-  Player(char up, char down, char left, char right, char start, char button1, char button2) {
+  Player(char up, char down, char left, char right, char start, char button1, char button2, char north, char south, char east, char west, char button3, char button4) {
         
     this.up = up;
     this.down = down;
@@ -29,18 +35,30 @@ class Player {
     this.start = start;
     this.button1 = button1;
     this.button2 = button2;
+    this.north = north;
+    this.south = south;
+    this.east = east;
+    this.west = west;
+    this.button3 = button3;
+    this.button4 = button4;
     
   }
   
   Player(XML xml) {
     
-    this(buttonNameToKey(xml, "up")
-        , buttonNameToKey(xml, "down")
-        , buttonNameToKey(xml, "left")
-        , buttonNameToKey(xml, "right")
-        , buttonNameToKey(xml, "start")
-        , buttonNameToKey(xml, "button1")
-        , buttonNameToKey(xml, "button2")
+    this(buttonNameToKey(xml, "up"), 
+         buttonNameToKey(xml, "down"), 
+         buttonNameToKey(xml, "left"), 
+         buttonNameToKey(xml, "right"), 
+         buttonNameToKey(xml, "start"), 
+         buttonNameToKey(xml, "button1"), 
+         buttonNameToKey(xml, "button2"), 
+         buttonNameToKey(xml, "north"), 
+         buttonNameToKey(xml, "south"), 
+         buttonNameToKey(xml, "west"), 
+         buttonNameToKey(xml, "east"), 
+         buttonNameToKey(xml, "button3"), 
+         buttonNameToKey(xml, "button4")
         );
         
         speed = 4.0f;
@@ -51,6 +69,10 @@ class Player {
         gameRight = new PVector(speed, 0);
         
         coolDown = 30;
+        
+        score = 0;
+        
+        health = 100;
   }
   
   void update() {
@@ -68,6 +90,11 @@ class Player {
         bullets.get(i).endPoint.add(gameDown);
         bullets.get(i).dest.add(gameDown);
       }
+      
+      for(int i = 0; i < planets.length; i++) {
+        
+        planets[i].add(gameDown);
+      }
     }
     
     if(checkKey(down)) {
@@ -81,6 +108,11 @@ class Player {
         
         bullets.get(i).startPoint.add(gameUp);
         bullets.get(i).endPoint.add(gameUp);
+      }
+      
+      for(int i = 0; i < planets.length; i++) {
+        
+        planets[i].add(gameUp);
       }
     }
     
@@ -97,6 +129,11 @@ class Player {
         bullets.get(i).endPoint.add(gameRight);
         bullets.get(i).dest.add(gameRight);
       }
+      
+      for(int i = 0; i < planets.length; i++) {
+        
+        planets[i].add(gameRight);
+      }
     }    
     
     if(checkKey(right)) {
@@ -111,6 +148,11 @@ class Player {
         bullets.get(i).startPoint.add(gameLeft);
         bullets.get(i).endPoint.add(gameLeft);
         bullets.get(i).dest.add(gameLeft);
+      }
+      
+      for(int i = 0; i < planets.length; i++) {
+        
+        planets[i].add(gameLeft);
       }
     }
     

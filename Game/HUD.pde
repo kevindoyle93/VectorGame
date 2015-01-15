@@ -62,6 +62,9 @@ class HUD {
     line(points[14].x, points[14].y, points[11].x, points[11].y);
     
     crosshair();
+    
+    stats();
+    
   }
   
   void crosshair() {
@@ -90,6 +93,32 @@ class HUD {
     radius /= 2;
     
     ellipse(centre.x, centre.y, radius, radius);
+    
+  }
+  
+  void stats() {
+    
+    textSize((points[15].y - points[0].y) * 0.3);
+    textAlign(LEFT, CENTER);
+    fill(255);
+    text("HEALTH:", points[0].x, (points[15].y - (points[0].y * 0.5)));
+    
+    float healthLength = width * 0.15f * (p.health / 100.0f);
+    
+    if(p.health > 60) {
+      
+      fill(0, 255, 0);
+    }
+    else if(p.health > 30)  {
+      
+      fill(255, 255, 0);
+    }
+    else {
+      
+      fill(255, 0, 0);
+    }
+    
+    rect(points[0].x + ((points[1].x - points[0].x) / 3), points[0].y + ((points[15].y - points[0].y) / 3), healthLength, ((points[15].y - points[0].y) / 3));
     
   }
  

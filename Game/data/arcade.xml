@@ -8,15 +8,13 @@
 		<insertcoin>5</insertcoin>
 		<button1>e</button1>
 		<button2>r</button2>
+		<north>i</north>
+		<south>k</south>
+		<east>j</east>
+		<west>l</west>
+		<start2>p</start2>
+		<insertcoin2>5</insertcoin2>
+		<button3>p</button3>
+		<button4>[</button4>
 	</player>
-	<player>
-		<up>i</up>
-		<down>k</down>
-		<left>j</left>
-		<right>l</right>
-		<start>p</start>
-		<insertcoin>5</insertcoin>
-		<button1>p</button1>
-		<button2>[</button2>
-	</player>
-</arcade>	
+</arcade>

@@ -1,6 +1,7 @@
 PVector centre;
 boolean[] keys = new boolean[526];
 Player p;
+PFont myFont;
 
 void setup() {
   
@@ -9,6 +10,14 @@ void setup() {
   size(900, 500);
   
   centre = new PVector(width / 2, height / 2);
+  
+  planets = new PVector[5];
+  
+  for(int i = 0; i < planets.length; i++) {
+    
+    planets[i] = new PVector(random(0, width), random(0, height));
+    
+  }
   
   hud = new HUD(centre.x, centre.y);
   
@@ -22,6 +31,9 @@ void setup() {
   
   bullets = new ArrayList<Bullet>();
   
+  myFont = createFont("Rod", 20);
+  textFont(myFont);
+  
 }
 
 HUD hud;
@@ -33,6 +45,8 @@ ArrayList<Enemy> enemies;
 void draw() {
   
   background(0);
+  
+  //drawPlanets();
   
   p.update();
   
@@ -51,6 +65,35 @@ void draw() {
   hud.display();
   
 }
+
+PVector[] planets;
+
+void drawPlanets() {
+  
+  int r, b, g;
+  
+  int size = height / 3;
+  
+  r = 255;
+  g = 0;
+  b = 0;
+  
+  stroke(r, b, g);
+  
+  for(int i = 0; i < planets.length; i++) {
+    
+    for(int j = 0; j < 10; j++) {
+    
+      ellipse(planets[i].x, planets[i].y, size, size);
+      
+      size--;
+      
+    }
+    
+  }
+  
+}
+
 
 int count = 0;
 /*
@@ -154,17 +197,10 @@ char buttonNameToKey(XML xml, String buttonName)
 void setUpController() {
   
   XML xml = loadXML("arcade.xml");
-  XML[] children = xml.getChildren("player");
-  int gap = width / (children.length + 1);
-  println(children.length);
   
-  for(int i = 0; i < 1; i++) {
-    
-    XML playerXML = children[i];
-    p = new Player(playerXML);
-    
-    int x = (i + 1) * gap;
-  }
+  XML playerXML = xml.getChild("player");
+  
+  p = new Player(playerXML);
   
 }
     

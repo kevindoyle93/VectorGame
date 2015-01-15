@@ -109,7 +109,7 @@ class Enemy {
       
     }
     
-    if(count >= 60) {
+    if(count >= 90) {
       
       rand = (int)random(0, 20);
       
@@ -124,7 +124,7 @@ class Enemy {
     }
     else if(rand > 7 && rand < 15) {
       
-      size += speed / 10;
+      size += speed / 30.0f;
     }
     
     count++;

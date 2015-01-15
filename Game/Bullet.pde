@@ -28,7 +28,7 @@ class Bullet {
   
   Bullet(boolean left) {
     
-    speed = 15.0f;
+    speed = 20.0f;
     
     if(left) {
       

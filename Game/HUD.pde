@@ -5,6 +5,8 @@ class HUD {
   PVector points[];
   
   PVector centre;
+  
+  int view;  // holds the direction player is facing
  
   HUD(float centX, float centY) {
     
@@ -35,6 +37,8 @@ class HUD {
     
     points[14] = new PVector(width * 0.05f, height * 0.8f);
     points[15] = new PVector(width * 0.05f, height * 0.2f);
+    
+    view = 0;
   }
   
   void display() {
@@ -64,6 +68,8 @@ class HUD {
     crosshair();
     
     stats();
+    
+    directions[view].display();
     
   }
   

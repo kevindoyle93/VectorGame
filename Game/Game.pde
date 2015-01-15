@@ -4,6 +4,8 @@ Player p;
 PFont myFont;
 Gun gun;
 
+Direction[] directions;
+
 void setup() {
   
   setUpController();
@@ -22,17 +24,23 @@ void setup() {
   
   hud = new HUD(centre.x, centre.y);
   
-  enemies = new ArrayList<Enemy>();
- 
-  for(int i = 0; i < 5; i++) {
-    
-    enemies.add(new Enemy());
-    
-  }
+//  enemies = new ArrayList<Enemy>();
+// 
+//  for(int i = 0; i < 5; i++) {
+//    
+//    enemies.add(new Enemy());
+//    
+//  }
   
   bullets = new ArrayList<Bullet>();
   
   gun = new Gun();
+  
+  directions = new Direction[4];
+  directions[0] = new North();
+  directions[1] = new South();
+  directions[2] = new West();
+  directions[3] = new East();
   
   myFont = createFont("Rod", 20);
   textFont(myFont);
@@ -43,7 +51,6 @@ HUD hud;
 
 ArrayList<Bullet> bullets;
 
-ArrayList<Enemy> enemies;
 
 void draw() {
   
@@ -53,11 +60,11 @@ void draw() {
   
   p.update();
   
-  for(int i = 0; i < enemies.size(); i++) {
-    
-    enemies.get(i).display();
-    enemies.get(i).update();
-  }
+//  for(int i = 0; i < enemies.size(); i++) {
+//    
+//    enemies.get(i).display();
+//    enemies.get(i).update();
+//  }
   
   for(int i = 0; i < bullets.size(); i++) {
     

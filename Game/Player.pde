@@ -79,9 +79,9 @@ class Player {
     
     if(checkKey(up)) {
       
-      for(int i = 0; i < enemies.size(); i++) {
+      for(int i = 0; i < directions[0].enemies.size(); i++) {
       
-        enemies.get(i).cent.add(gameDown);
+        directions[0].enemies.get(i).cent.add(gameDown);
       }
       
       for(int i = 0; i < bullets.size(); i++) {
@@ -99,9 +99,9 @@ class Player {
     
     if(checkKey(down)) {
       
-      for(int i = 0; i < enemies.size(); i++) {
+      for(int i = 0; i < directions[0].enemies.size(); i++) {
       
-        enemies.get(i).cent.add(gameUp);
+        directions[0].enemies.get(i).cent.add(gameUp);
       }
       
       for(int i = 0; i < bullets.size(); i++) {
@@ -118,9 +118,9 @@ class Player {
     
     if(checkKey(left)) {
       
-      for(int i = 0; i < enemies.size(); i++) {
+      for(int i = 0; i < directions[0].enemies.size(); i++) {
       
-        enemies.get(i).cent.add(gameRight);
+        directions[0].enemies.get(i).cent.add(gameRight);
       }
       
       for(int i = 0; i < bullets.size(); i++) {
@@ -138,9 +138,9 @@ class Player {
     
     if(checkKey(right)) {
       
-      for(int i = 0; i < enemies.size(); i++) {
+      for(int i = 0; i < directions[0].enemies.size(); i++) {
       
-        enemies.get(i).cent.add(gameLeft);
+        directions[0].enemies.get(i).cent.add(gameLeft);
       }
       
       for(int i = 0; i < bullets.size(); i++) {
@@ -180,6 +180,30 @@ class Player {
       
       gun.ammo = 40;
       coolDown = -20;
+      
+    }
+    
+    if(checkKey(north)) {
+      
+      hud.view = 0;
+      
+    }
+    
+    if(checkKey(south)) {
+      
+      hud.view = 1;
+      
+    }
+    
+    if(checkKey(west)) {
+      
+      hud.view = 2;
+      
+    }
+    
+    if(checkKey(east)) {
+      
+      hud.view = 3;
       
     }
     

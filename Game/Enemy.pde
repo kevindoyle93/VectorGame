@@ -93,7 +93,7 @@ class Enemy {
       
       // Put something here as a destroyed animation. Like the separate lines falling apart or something
       
-      enemies.remove(this);
+      directions[0].enemies.remove(this);
       
     }
     

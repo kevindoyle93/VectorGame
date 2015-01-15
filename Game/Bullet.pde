@@ -152,17 +152,17 @@ class Bullet {
     
     boolean ret;
     
-    for(int i = 0; i < enemies.size(); i++) {
+    for(int i = 0; i < directions[0].enemies.size(); i++) {
       
-      if(enemies.get(i).lockedOn) {
+      if(directions[0].enemies.get(i).lockedOn) {
     
         if(left) {
           
-          if(endPoint.x > (enemies.get(i).cent.x - (enemies.get(i).size * 1.5))) {
+          if(endPoint.x > (directions[0].enemies.get(i).cent.x - (directions[0].enemies.get(i).size * 1.5))) {
             
             ret = check2(i);
               
-            enemies.get(i).alive = !ret;
+            directions[0].enemies.get(i).alive = !ret;
             
             return ret;
             
@@ -171,11 +171,11 @@ class Bullet {
       
         else {
           
-          if(endPoint.x < (enemies.get(i).cent.x + (enemies.get(i).size * 1.5))) {
+          if(endPoint.x < (directions[0].enemies.get(i).cent.x + (directions[0].enemies.get(i).size * 1.5))) {
             
             ret = check2(i);
               
-            enemies.get(i).alive = !ret;
+            directions[0].enemies.get(i).alive = !ret;
             
             return ret;
             
@@ -196,7 +196,7 @@ class Bullet {
     
     boolean ret;
     
-    if(endPoint.y > (enemies.get(i).cent.y - (enemies.get(i).size / 2))) {
+    if(endPoint.y > (directions[0].enemies.get(i).cent.y - (directions[0].enemies.get(i).size / 2))) {
       
       ret = check3(i);
       return ret;
@@ -212,7 +212,7 @@ class Bullet {
     
     boolean ret;
     
-    if(endPoint.y < (enemies.get(i).cent.y + (enemies.get(i).size / 2))) {
+    if(endPoint.y < (directions[0].enemies.get(i).cent.y + (directions[0].enemies.get(i).size / 2))) {
       
       ret = true;
       return ret;
@@ -226,11 +226,11 @@ class Bullet {
   
   void checkTarget() {
     
-    for(int i = 0; i < enemies.size(); i++) {
+    for(int i = 0; i < directions[0].enemies.size(); i++) {
       
-      if(enemies.get(i).targeted) {
+      if(directions[0].enemies.get(i).targeted) {
         
-        enemies.get(i).lockedOn = true;
+        directions[0].enemies.get(i).lockedOn = true;
         
         break;
         

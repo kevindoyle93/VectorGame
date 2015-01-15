@@ -103,7 +103,8 @@ class HUD {
     fill(255);
     text("HEALTH:", points[0].x, (points[15].y - (points[0].y * 0.5)));
     
-    float healthLength = width * 0.15f * (p.health / 100.0f);
+    float healthWidth = width * 0.15f * (p.health / 100.0f);
+    float healthHeight = (points[15].y - points[0].y) / 3;
     
     if(p.health > 60) {
       
@@ -118,7 +119,21 @@ class HUD {
       fill(255, 0, 0);
     }
     
-    rect(points[0].x + ((points[1].x - points[0].x) / 3), points[0].y + ((points[15].y - points[0].y) / 3), healthLength, ((points[15].y - points[0].y) / 3));
+    rect(points[0].x + ((points[1].x - points[0].x) / 3), points[0].y + ((points[15].y - points[0].y) / 3), healthWidth, healthHeight);
+    
+    int ammoWidth = (int)(width * 0.2 / 40);
+    float ammoHeight = healthHeight;
+    float ammoGap = ammoWidth;
+    
+    fill(255);
+    text("AMMO:", points[4].x, (points[15].y - (points[0].y * 0.5)));
+    
+    fill(255, 0, 0);
+    for(int i = 0; i < gun.ammo; i++) {
+      
+      // I think I can use a transform here
+      rect(points[4].x + ((points[5].x - points[4].x) / 4) + (ammoGap * i), points[0].y + ((points[15].y - points[0].y) / 3), ammoWidth, ammoHeight);
+    }
     
   }
  

@@ -2,6 +2,7 @@ PVector centre;
 boolean[] keys = new boolean[526];
 Player p;
 PFont myFont;
+Gun gun;
 
 void setup() {
   
@@ -30,6 +31,8 @@ void setup() {
   }
   
   bullets = new ArrayList<Bullet>();
+  
+  gun = new Gun();
   
   myFont = createFont("Rod", 20);
   textFont(myFont);

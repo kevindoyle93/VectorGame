@@ -12,13 +12,14 @@ class Gun {
   
   boolean left;
   
-  Gun(PVector base, boolean left) {
+  //Gun(PVector base, boolean left) {
+  Gun() {
     
-    this.base = base.get();
+    //this.base = base.get();
     
-    this.left = left;
+    //this.left = left;
     
-    ammo = 25;
+    ammo = 40;
     
     theta = 0; // trig
     

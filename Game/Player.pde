@@ -158,7 +158,7 @@ class Player {
     
     if(checkKey(button1)) {
       
-      if(coolDown > 10) {
+      if(coolDown > 10 && gun.ammo > 0) {
       
         if(count % 2 == 0) {
         
@@ -170,9 +170,16 @@ class Player {
         }
         
         count++;
+        gun.ammo--;
         coolDown = 0;
         
       }
+    }
+      
+    if(checkKey(button2)) {
+      
+      gun.ammo = 40;
+      coolDown = -20;
       
     }
     

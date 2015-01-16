@@ -28,7 +28,9 @@ class Enemy {
   
   boolean alive;
   
-  Enemy() {
+  int view;
+  
+  Enemy(int view) {
     
     alive = true;
     
@@ -36,7 +38,7 @@ class Enemy {
     
     minDist = width / 25;
     
-    cent = new PVector(random(width * 0.4, width * 0.6), random(height * 0.4, height * 0.6));
+    cent = new PVector(random(width * 0.45, width * 0.55), random(height * 0.45, height * 0.55));
     
     size = maxDist;
     
@@ -55,7 +57,11 @@ class Enemy {
     
     count = 30; //half of 60fps
     
+    coolDown = (int)random(0, 120);
+    
     loaded = false;
+    
+    this.view = view;
 
   }
   
@@ -120,7 +126,11 @@ class Enemy {
       
     if(rand < 8) {
       
-      cent.add(move[rand]);
+      if(cent.x > 0 && cent.x < width && cent.y > 0 && cent.y < height) {
+      
+        cent.add(move[rand]);
+        
+      }
     }
     else if(rand > 7 && rand < 15) {
       
@@ -183,6 +193,16 @@ class Enemy {
       loaded = false;
       
       coolDown = 0;
+      
+      int chance = (int)(size / maxDist) * 3;
+      
+      int hit = (int)random(1, 101);
+      
+      if(hit < chance) {
+        
+        p.health -= 10;
+        
+      }
       
     }
   }

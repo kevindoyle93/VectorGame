@@ -43,6 +43,8 @@ class HUD {
   
   void display() {
     
+    directions[view].display();
+    
     stroke(0);
     fill(0);
     
@@ -68,8 +70,6 @@ class HUD {
     crosshair();
     
     stats();
-    
-    directions[view].display();
     
   }
   

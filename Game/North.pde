@@ -4,7 +4,11 @@ class North extends Direction {
 //  
 //  float doorH, doorW, handleSize;
 
+  int view;
+
   North() {
+    
+    view = 0;
     
     cent = new PVector(centre.x, centre.y - 50);
     
@@ -12,7 +16,7 @@ class North extends Direction {
  
     for(int i = 0; i < 5; i++) {
       
-      enemies.add(new Enemy());
+      enemies.add(new Enemy(view));
       
     }
       
@@ -27,10 +31,37 @@ class North extends Direction {
     
     for(int i = 0; i < enemies.size(); i++) {
     
-      enemies.get(i).display();
       enemies.get(i).update();
+      enemies.get(i).display();
     }
     
+  }
+  
+  void update() {
+    
+    sortEnemies();
+    
+  }
+  
+  void sortEnemies() {
+    
+    Enemy temp;
+    
+    for(int i = 0; i < enemies.size(); i++) {
+      
+      for(int j = 1; j < enemies.size(); j++) {
+        
+        if(enemies.get(j).size < enemies.get(j - 1).size) {
+          
+          temp = enemies.get(j);
+          //enemies.get(j) = enemies.get(j - 1);
+          //enemies.get(j - 1) = temp.get();
+          enemies.set(j, enemies.get(j - 1));
+          enemies.set(j - 1, temp);
+          
+        }
+      }
+    }
   }
   
 }

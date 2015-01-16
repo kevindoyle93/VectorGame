@@ -19,7 +19,7 @@ class Gun {
     
     //this.left = left;
     
-    ammo = 40;
+    ammo = 30;
     
     theta = 0; // trig
     

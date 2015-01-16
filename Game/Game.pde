@@ -4,6 +4,8 @@ Player p;
 PFont myFont;
 Gun gun;
 
+int spawnRate;
+
 Direction[] directions;
 
 void setup() {
@@ -45,6 +47,8 @@ void setup() {
   myFont = createFont("Rod", 20);
   textFont(myFont);
   
+  spawnRate = 60;
+  
 }
 
 HUD hud;
@@ -58,13 +62,10 @@ void draw() {
   
   //drawPlanets();
   
+  spawnEnemies();
+  
   p.update();
   
-//  for(int i = 0; i < enemies.size(); i++) {
-//    
-//    enemies.get(i).display();
-//    enemies.get(i).update();
-//  }
   
   for(int i = 0; i < bullets.size(); i++) {
     
@@ -104,6 +105,17 @@ void drawPlanets() {
   
 }
 
+void spawnEnemies() {
+  
+  if((int)random(1, frameRate * 1000) < spawnRate) {
+    
+    directions[0].addEnemy();
+    spawnRate = 0;
+  }
+  
+  spawnRate++;
+  
+}
 
 int count = 0;
 /*

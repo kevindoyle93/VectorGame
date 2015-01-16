@@ -4,7 +4,16 @@ class Direction {
   
   ArrayList<Enemy> enemies;
   
-  void display(){
+  void display() {
     
   }
+  
+  void update() {
+    
+  }
+  
+  void addEnemy() {
+    
+  }
+  
 }

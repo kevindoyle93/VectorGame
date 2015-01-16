@@ -18,6 +18,8 @@ class Enemy {
   
   int progress;
   
+  float loadTime;
+  
   int coolDown;
   
   boolean loaded;
@@ -38,9 +40,9 @@ class Enemy {
     
     minDist = width / 25;
     
-    cent = new PVector(random(width * 0.45, width * 0.55), random(height * 0.45, height * 0.55));
+    cent = new PVector(random(width * 0.49, width * 0.51), random(height * 0.49, height * 0.51));
     
-    size = maxDist;
+    size = 0;
     
     speed = 0.5f;
     
@@ -58,6 +60,8 @@ class Enemy {
     count = 30; //half of 60fps
     
     coolDown = (int)random(0, 120);
+    
+    loadTime = 240.0f;
     
     loaded = false;
     
@@ -126,7 +130,7 @@ class Enemy {
       
     if(rand < 8) {
       
-      if(cent.x > 0 && cent.x < width && cent.y > 0 && cent.y < height) {
+      if(cent.x > hud.points[0].x && cent.x < hud.points[5].x && cent.y > hud.points[15].y && cent.y < hud.points[7].y) {
       
         cent.add(move[rand]);
         
@@ -157,24 +161,25 @@ class Enemy {
     progress++;
     
     if(progress > 250) {
-      
+        
       loaded = true;
       
       progress = 0;
       
     }
     
-    stroke(130, 255, 80);
+//    stroke(130, 255, 80);
+//    
+//    float x = (size / 2.0f / loadTime * progress);
+//    float y = (size / 2.0f / loadTime * progress);
+//    
+//    line(cent.x - size / 2, cent.y - size / 2, cent.x - size / 2 + x, cent.y - size / 2 + y);
+//    line(cent.x - size / 2, cent.y + size / 2, cent.x - size / 2 + x, cent.y + size / 2 - y);
+//    line(cent.x + size / 2, cent.y - size / 2, cent.x + size / 2 - x, cent.y - size / 2 + y);
+//    line(cent.x + size / 2, cent.y + size / 2, cent.x + size / 2 - x, cent.y + size / 2 - y);
+//    
     
-    float x = (size / 2.0f / 240.0f * progress);
-    float y = (size / 2.0f / 240.0f * progress);
-    
-    line(cent.x - size / 2, cent.y - size / 2, cent.x - size / 2 + x, cent.y - size / 2 + y);
-    line(cent.x - size / 2, cent.y + size / 2, cent.x - size / 2 + x, cent.y + size / 2 - y);
-    line(cent.x + size / 2, cent.y - size / 2, cent.x + size / 2 - x, cent.y - size / 2 + y);
-    line(cent.x + size / 2, cent.y + size / 2, cent.x + size / 2 - x, cent.y + size / 2 - y);
-    
-    if(progress > 240) {
+    if(progress > loadTime) {
       
       fill(130, 255, 80);
       

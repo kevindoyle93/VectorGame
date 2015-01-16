@@ -54,14 +54,18 @@ class North extends Direction {
         if(enemies.get(j).size < enemies.get(j - 1).size) {
           
           temp = enemies.get(j);
-          //enemies.get(j) = enemies.get(j - 1);
-          //enemies.get(j - 1) = temp.get();
           enemies.set(j, enemies.get(j - 1));
           enemies.set(j - 1, temp);
           
         }
       }
     }
+  }
+  
+  void addEnemy() {
+    
+    enemies.add(new Enemy(0));
+    
   }
   
 }

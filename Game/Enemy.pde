@@ -99,6 +99,7 @@ class Enemy {
   
   void update() {
     
+    
     if(!alive) {
       
       // Put something here as a destroyed animation. Like the separate lines falling apart or something
@@ -106,6 +107,8 @@ class Enemy {
       directions[0].enemies.remove(this);
       
     }
+    
+    //calcSpeed();
     
     checkTargeted();
     
@@ -168,16 +171,17 @@ class Enemy {
       
     }
     
-//    stroke(130, 255, 80);
-//    
-//    float x = (size / 2.0f / loadTime * progress);
-//    float y = (size / 2.0f / loadTime * progress);
-//    
-//    line(cent.x - size / 2, cent.y - size / 2, cent.x - size / 2 + x, cent.y - size / 2 + y);
-//    line(cent.x - size / 2, cent.y + size / 2, cent.x - size / 2 + x, cent.y + size / 2 - y);
-//    line(cent.x + size / 2, cent.y - size / 2, cent.x + size / 2 - x, cent.y - size / 2 + y);
-//    line(cent.x + size / 2, cent.y + size / 2, cent.x + size / 2 - x, cent.y + size / 2 - y);
-//    
+    stroke(130, 255, 80);
+    fill(130, 255, 80);
+    
+    float x = (size / 2.0f / loadTime * progress);
+    float y = (size / 2.0f / loadTime * progress);
+    
+    line(cent.x - size / 2, cent.y - size / 2, cent.x - size / 2 + x, cent.y - size / 2 + y);
+    line(cent.x - size / 2, cent.y + size / 2, cent.x - size / 2 + x, cent.y + size / 2 - y);
+    line(cent.x + size / 2, cent.y - size / 2, cent.x + size / 2 - x, cent.y - size / 2 + y);
+    line(cent.x + size / 2, cent.y + size / 2, cent.x + size / 2 - x, cent.y + size / 2 - y);
+    
     
     if(progress > loadTime) {
       
@@ -188,6 +192,18 @@ class Enemy {
     }
     
   }
+  
+//  float calcSpeed() {
+//    
+//    float percentage;
+//    
+//    percentage = (size / minDist) * 100;
+//    
+//    ret = 
+//    
+//    return ret;
+//    
+//  }
   
   void shoot() {
     

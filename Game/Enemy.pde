@@ -124,9 +124,14 @@ class Enemy {
       
     if(rand < 8) {
       
-      if(cent.x > hud.points[0].x && cent.x < hud.points[5].x && cent.y > hud.points[15].y && cent.y < hud.points[7].y) {
+      if(allowMovement()) {
       
         cent.add(move[rand]);
+        
+      }
+      else {
+        
+        rand = (int)random(0, 20);
         
       }
     }

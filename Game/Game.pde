@@ -46,13 +46,6 @@ void setup() {
   
   hud = new HUD(centre.x, centre.y);
   
-//  enemies = new ArrayList<Enemy>();
-// 
-//  for(int i = 0; i < 5; i++) {
-//    
-//    enemies.add(new Enemy());
-//    
-//  }
   
   bullets = new ArrayList<Bullet>();
   
@@ -63,6 +56,8 @@ void setup() {
   directions[1] = new South();
   directions[2] = new West();
   directions[3] = new East();
+  
+  directions[0].display = true;
   
   myFont = createFont("Rod", 20);
   textFont(myFont);
@@ -79,6 +74,15 @@ ArrayList<Bullet> bullets;
 void draw() {
   
   background(0);
+  for(int i = 0; i < directions.length; i++) {
+    
+    if(directions[i].display) {
+      
+      background(directions[i].background);
+      
+    }
+    
+  }
   
   //drawPlanets();
   
@@ -129,7 +133,9 @@ void spawnEnemies() {
   
   if((int)random(1, frameRate * 1000) < spawnRate) {
     
-    directions[0].addEnemy();
+    int rand = (int)random(0, 4);
+    
+    directions[rand].addEnemy();
     spawnRate = 0;
   }
   

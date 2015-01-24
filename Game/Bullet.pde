@@ -152,37 +152,40 @@ class Bullet {
     
     boolean ret;
     
-    for(int i = 0; i < directions[0].enemies.size(); i++) {
-      
-      if(directions[0].enemies.get(i).lockedOn) {
+    for(int i = 0; i < directions.length; i++) {
     
-        if(left) {
-          
-          if(endPoint.x > (directions[0].enemies.get(i).cent.x - (directions[0].enemies.get(i).size * 1.5))) {
-            
-            ret = check2(i);
-              
-            directions[0].enemies.get(i).alive = !ret;
-            
-            return ret;
-            
-          }
-        }
+      for(int j = 0; j < directions[i].enemies.size(); j++) {
+        
+        if(directions[i].enemies.get(j).lockedOn) {
       
-        else {
-          
-          if(endPoint.x < (directions[0].enemies.get(i).cent.x + (directions[0].enemies.get(i).size * 1.5))) {
+          if(left) {
             
-            ret = check2(i);
+            if(endPoint.x > (directions[i].enemies.get(j).cent.x - (directions[i].enemies.get(j).size * 1.5))) {
               
-            directions[0].enemies.get(i).alive = !ret;
-            
-            return ret;
-            
+              ret = check2(i, j);
+                
+              directions[i].enemies.get(j).alive = !ret;
+              
+              return ret;
+              
+            }
           }
         
+          else {
+            
+            if(endPoint.x < (directions[i].enemies.get(j).cent.x + (directions[i].enemies.get(j).size * 1.5))) {
+              
+              ret = check2(i, j);
+                
+              directions[i].enemies.get(j).alive = !ret;
+              
+              return ret;
+              
+            }
+          
+          }
+          
         }
-        
       }
     }
     
@@ -192,13 +195,13 @@ class Bullet {
   }
   
   
-  boolean check2(int i) {
+  boolean check2(int i, int j) {
     
     boolean ret;
     
-    if(endPoint.y > (directions[0].enemies.get(i).cent.y - (directions[0].enemies.get(i).size / 2))) {
+    if(endPoint.y > (directions[i].enemies.get(j).cent.y - (directions[i].enemies.get(j).size / 2))) {
       
-      ret = check3(i);
+      ret = check3(i, j);
       return ret;
       
     }
@@ -208,11 +211,11 @@ class Bullet {
     
   }
   
-  boolean check3(int i) {
+  boolean check3(int i, int j) {
     
     boolean ret;
     
-    if(endPoint.y < (directions[0].enemies.get(i).cent.y + (directions[0].enemies.get(i).size / 2))) {
+    if(endPoint.y < (directions[i].enemies.get(j).cent.y + (directions[i].enemies.get(j).size / 2))) {
       
       ret = true;
       return ret;
@@ -226,13 +229,17 @@ class Bullet {
   
   void checkTarget() {
     
-    for(int i = 0; i < directions[0].enemies.size(); i++) {
-      
-      if(directions[0].enemies.get(i).targeted) {
+    for(int i = 0; i < directions.length; i++) {
+    
+      for(int j = 0; j < directions[i].enemies.size(); j++) {
         
-        directions[0].enemies.get(i).lockedOn = true;
-        
-        break;
+        if(directions[i].enemies.get(j).targeted) {
+          
+          directions[i].enemies.get(j).lockedOn = true;
+          
+          break;
+          
+        }
         
       }
       

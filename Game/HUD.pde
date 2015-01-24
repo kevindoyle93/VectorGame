@@ -96,7 +96,7 @@ class HUD {
     stroke(0);
     fill(0);
     
-    radius /= 2;
+    radius /= 4;
     
     ellipse(centre.x, centre.y, radius, radius);
     

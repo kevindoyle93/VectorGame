@@ -1,12 +1,9 @@
 class North extends Direction {
-  
-//  PVector doorBL, doorBR, handleL, handleR;
-//  
-//  float doorH, doorW, handleSize;
-
-  int view;
 
   North() {
+    
+    background = loadImage("space.jpg");
+    background.resize(width, height);
     
     view = 0;
     
@@ -17,11 +14,6 @@ class North extends Direction {
   }
     
   void display() {
-    
-    stroke(255);
-    noFill();
-    
-    ellipse(cent.x, cent.y, 50, 50);
     
     for(int i = 0; i < enemies.size(); i++) {
       

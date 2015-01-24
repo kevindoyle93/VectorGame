@@ -81,13 +81,17 @@ class Player {
       
       for(int i = 0; i < directions.length; i++) {
         
-        directions[i].cent.add(gameDown);
+        if(directions[i].display) {
         
-      }
-      
-      for(int i = 0; i < directions[0].enemies.size(); i++) {
-      
-        directions[0].enemies.get(i).cent.add(gameDown);
+          directions[i].cent.add(gameDown);
+          
+          for(int j = 0; j < directions[i].enemies.size(); j++) {
+          
+            directions[i].enemies.get(j).cent.add(gameDown);
+          }
+          
+        }
+        
       }
       
       for(int i = 0; i < bullets.size(); i++) {
@@ -107,13 +111,17 @@ class Player {
       
       for(int i = 0; i < directions.length; i++) {
         
-        directions[i].cent.add(gameUp);
+        if(directions[i].display) {
         
-      }
-      
-      for(int i = 0; i < directions[0].enemies.size(); i++) {
-      
-        directions[0].enemies.get(i).cent.add(gameUp);
+          directions[i].cent.add(gameUp);
+          
+          for(int j = 0; j < directions[i].enemies.size(); j++) {
+          
+            directions[i].enemies.get(j).cent.add(gameUp);
+          }
+          
+        }
+        
       }
       
       for(int i = 0; i < bullets.size(); i++) {
@@ -132,13 +140,17 @@ class Player {
       
       for(int i = 0; i < directions.length; i++) {
         
-        directions[i].cent.add(gameRight);
+        if(directions[i].display) {
         
-      }
-      
-      for(int i = 0; i < directions[0].enemies.size(); i++) {
-      
-        directions[0].enemies.get(i).cent.add(gameRight);
+          directions[i].cent.add(gameRight);
+          
+          for(int j = 0; j < directions[i].enemies.size(); j++) {
+          
+            directions[i].enemies.get(j).cent.add(gameRight);
+          }
+          
+        }
+        
       }
       
       for(int i = 0; i < bullets.size(); i++) {
@@ -158,13 +170,17 @@ class Player {
       
       for(int i = 0; i < directions.length; i++) {
         
-        directions[i].cent.add(gameLeft);
+        if(directions[i].display) {
         
-      }
-      
-      for(int i = 0; i < directions[0].enemies.size(); i++) {
-      
-        directions[0].enemies.get(i).cent.add(gameLeft);
+          directions[i].cent.add(gameLeft);
+          
+          for(int j = 0; j < directions[i].enemies.size(); j++) {
+          
+            directions[i].enemies.get(j).cent.add(gameLeft);
+          }
+          
+        }
+        
       }
       
       for(int i = 0; i < bullets.size(); i++) {
@@ -212,11 +228,47 @@ class Player {
       
       hud.view = 0;
       
+      for(int i = 0; i < directions.length; i++) {
+        
+        if(i == hud.view) {
+          
+          directions[i].display = true;
+          
+        }
+        
+        else {
+          
+          directions[i].display = false;
+          directions[i].cent.x = centre.x;
+          directions[i].cent.y = centre.y;
+          
+        }
+        
+      }
+      
     }
     
     if(checkKey(south)) {
       
       hud.view = 1;
+      
+      for(int i = 0; i < directions.length; i++) {
+        
+        if(i == hud.view) {
+          
+          directions[i].display = true;
+          
+        }
+        
+        else {
+          
+          directions[i].display = false;
+          directions[i].cent.x = centre.x;
+          directions[i].cent.y = centre.y;
+          
+        }
+        
+      }
       
     }
     
@@ -224,11 +276,47 @@ class Player {
       
       hud.view = 2;
       
+      for(int i = 0; i < directions.length; i++) {
+        
+        if(i == hud.view) {
+          
+          directions[i].display = true;
+          
+        }
+        
+        else {
+          
+          directions[i].display = false;
+          directions[i].cent.x = centre.x;
+          directions[i].cent.y = centre.y;
+          
+        }
+        
+      }
+      
     }
     
     if(checkKey(east)) {
       
       hud.view = 3;
+      
+      for(int i = 0; i < directions.length; i++) {
+        
+        if(i == hud.view) {
+          
+          directions[i].display = true;
+          
+        }
+        
+        else {
+          
+          directions[i].display = false;
+          directions[i].cent.x = centre.x;
+          directions[i].cent.y = centre.y;
+          
+        }
+        
+      }
       
     }
     

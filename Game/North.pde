@@ -10,15 +10,9 @@ class North extends Direction {
     
     view = 0;
     
-    cent = new PVector(centre.x, centre.y - 50);
+    cent = new PVector(centre.x, centre.y);
     
     enemies = new ArrayList<Enemy>();
- 
-    for(int i = 0; i < 5; i++) {
-      
-      enemies.add(new Enemy(view));
-      
-    }
       
   }
     
@@ -30,9 +24,9 @@ class North extends Direction {
     ellipse(cent.x, cent.y, 50, 50);
     
     for(int i = 0; i < enemies.size(); i++) {
-    
-      enemies.get(i).update();
+      
       enemies.get(i).display();
+      enemies.get(i).update();
     }
     
   }

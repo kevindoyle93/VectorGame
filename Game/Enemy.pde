@@ -6,11 +6,11 @@ class Enemy {
   
   PVector up, down, left, right, lUp, rUp, lDown, rDown;
   
-  float maxDist, minDist;
+  float maxDist;
   
-  float size;
+  float size, maxSize;
   
-  float speed;
+  float speed, maxSpeed;
   
   int count;
   
@@ -38,13 +38,13 @@ class Enemy {
     
     maxDist = width / 200;
     
-    minDist = width / 25;
+    maxSize = width / 20;
     
-    cent = new PVector(random(width * 0.49, width * 0.51), random(height * 0.49, height * 0.51));
+    cent = new PVector(directions[view].cent.x, directions[view].cent.y);
     
     size = 0;
-    
     speed = 0.5f;
+    maxSpeed = 1.0f;
     
     move = new PVector[8];
     
@@ -99,21 +99,12 @@ class Enemy {
   
   void update() {
     
-    
-    if(!alive) {
-      
-      // Put something here as a destroyed animation. Like the separate lines falling apart or something
-      
-      directions[0].enemies.remove(this);
-      
-    }
-    
     //calcSpeed();
     
     checkTargeted();
     
     
-    if(size > (minDist - speed)) {
+    if(size > (maxSize - speed)) {
       
       //move away from player
       size -= speed;
@@ -141,7 +132,7 @@ class Enemy {
     }
     else if(rand > 7 && rand < 15) {
       
-      size += speed / 30.0f;
+      size += speed / (frameRate / 2.0f);
     }
     
     count++;
@@ -191,19 +182,33 @@ class Enemy {
       
     }
     
+    if(!alive) {
+      
+      // Put something here as a destroyed animation. Like the separate lines falling apart or something
+      
+      boom.play(0);
+      directions[0].enemies.remove(this);
+      
+    }
+    
   }
   
-//  float calcSpeed() {
-//    
-//    float percentage;
-//    
-//    percentage = (size / minDist) * 100;
-//    
-//    ret = 
-//    
-//    return ret;
-//    
-//  }
+  void calcSpeed() {
+    
+    if(speed == 0.0f) {
+      
+      speed = 0.5f;
+      println("");
+      return;
+    }
+    
+    float percentage;
+    
+    percentage = (size / maxSize) * 200.0f;
+    
+    speed = maxSpeed / 100.0f * percentage;
+    println(speed);
+  }
   
   void shoot() {
     
@@ -240,6 +245,32 @@ class Enemy {
       targeted = false;
       
     }
+    
+  }
+  
+  boolean allowMovement() {
+    
+    if(cent.x < (directions[view].cent.x - size * 10)) {
+      
+      return false;
+      
+    }
+    
+    if(cent.x > (directions[view].cent.x + size * 10)) {
+      
+      return false;
+      
+    }
+    if(cent.y > (directions[view].cent.y + size * 6)) {
+     
+      return false;
+    }
+    if(cent.y < (directions[view].cent.y - size * 6)) {
+      
+      return false;
+    }
+    
+    return true;
     
   }
   

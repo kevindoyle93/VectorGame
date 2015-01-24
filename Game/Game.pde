@@ -1,3 +1,16 @@
+import ddf.minim.spi.*;
+import ddf.minim.signals.*;
+import ddf.minim.*;
+import ddf.minim.analysis.*;
+import ddf.minim.ugens.*;
+import ddf.minim.effects.*;
+
+// Audio
+Minim minim;
+AudioPlayer backgroundMusic;
+AudioPlayer gunSound;
+AudioPlayer boom;
+
 PVector centre;
 boolean[] keys = new boolean[526];
 Player p;
@@ -11,6 +24,13 @@ Direction[] directions;
 void setup() {
   
   setUpController();
+  
+  // Load music/sounds
+  minim = new Minim(this);
+  backgroundMusic = minim.loadFile("bgm.mp3");
+  backgroundMusic.loop();
+  gunSound = minim.loadFile("laser.mp3");
+  boom = minim.loadFile("boom.mp3");
   
   size(900, 500);
   
@@ -117,65 +137,7 @@ void spawnEnemies() {
   
 }
 
-int count = 0;
-/*
-void keyPressed() {
-  
-  if(key == 'e' || key == 'E') {
-    
-    if(count % 2 == 0) {
-      
-      bullets.add(new Bullet(true));
-    }
-    else {
-      
-      bullets.add(new Bullet(false));
-    }
-    count++;
-  }
-  
-  if(key == 'w' || key == 'W') {
-    
-    for(int i = 0; i < enemies.size(); i++) {
-      
-      enemies.get(i).cent.y += 5;
-    }
-    
-    for(int i = 0; i < bullets.size(); i++) {
-      
-      bullets.get(i).dest.y += 10;
-    }
-    
-  }
-  
-  if(key == 's' || key == 'S') {
-    
-    for(int i = 0; i < enemies.size(); i++) {
-      
-      enemies.get(i).cent.y -= 10;
-    }
-    
-  }
-  
-  if(key == 'a' || key == 'A') {
-    
-    for(int i = 0; i < enemies.size(); i++) {
-      
-      enemies.get(i).cent.x += 10;
-    }
-    
-  }
-  
-  if(key == 'd' || key == 'D') {
-    
-    for(int i = 0; i < enemies.size(); i++) {
-      
-      enemies.get(i).cent.x -= 10;
-    }
-    
-  }
-}
-*/
+int count = 99;
 
 void keyPressed()
 {

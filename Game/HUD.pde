@@ -141,6 +141,9 @@ class HUD {
       rect(points[4].x + ((points[5].x - points[4].x) / 4) + (ammoGap * i), points[0].y + ((points[15].y - points[0].y) / 3), ammoWidth, ammoHeight);
     }
     
+    fill(255);
+    text("PROXIMITY:", points[13].x, (points[13].y - (points[0].y * 0.5)));
+    
   }
  
 }

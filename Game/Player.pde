@@ -61,7 +61,7 @@ class Player {
          buttonNameToKey(xml, "button4")
         );
         
-        speed = 4.0f;
+        speed = 2.0f;
         
         gameUp = new PVector(0, -speed);
         gameDown = new PVector(0, speed);
@@ -78,6 +78,12 @@ class Player {
   void update() {
     
     if(checkKey(up)) {
+      
+      for(int i = 0; i < directions.length; i++) {
+        
+        directions[i].cent.add(gameDown);
+        
+      }
       
       for(int i = 0; i < directions[0].enemies.size(); i++) {
       
@@ -99,6 +105,12 @@ class Player {
     
     if(checkKey(down)) {
       
+      for(int i = 0; i < directions.length; i++) {
+        
+        directions[i].cent.add(gameUp);
+        
+      }
+      
       for(int i = 0; i < directions[0].enemies.size(); i++) {
       
         directions[0].enemies.get(i).cent.add(gameUp);
@@ -117,6 +129,12 @@ class Player {
     }
     
     if(checkKey(left)) {
+      
+      for(int i = 0; i < directions.length; i++) {
+        
+        directions[i].cent.add(gameRight);
+        
+      }
       
       for(int i = 0; i < directions[0].enemies.size(); i++) {
       
@@ -137,6 +155,12 @@ class Player {
     }    
     
     if(checkKey(right)) {
+      
+      for(int i = 0; i < directions.length; i++) {
+        
+        directions[i].cent.add(gameLeft);
+        
+      }
       
       for(int i = 0; i < directions[0].enemies.size(); i++) {
       
@@ -169,6 +193,7 @@ class Player {
           bullets.add(new Bullet(false));
         }
         
+        gunSound.play(0);
         count++;
         gun.ammo--;
         coolDown = 0;

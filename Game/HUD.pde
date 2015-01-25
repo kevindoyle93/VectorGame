@@ -144,6 +144,10 @@ class HUD {
     fill(255);
     text("PROXIMITY:", points[13].x, (points[13].y - (points[0].y * 0.5)));
     
+    
+    fill(255);
+    text("Score:", points[9].x, (points[13].y - (points[0].y * 0.5)));
+    
   }
  
 }

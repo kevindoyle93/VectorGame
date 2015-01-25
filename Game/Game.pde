@@ -28,7 +28,7 @@ void setup() {
   // Load music/sounds
   minim = new Minim(this);
   backgroundMusic = minim.loadFile("bgm.mp3");
-  backgroundMusic.loop();
+  //backgroundMusic.loop();
   gunSound = minim.loadFile("laser.mp3");
   boom = minim.loadFile("boom.mp3");
   
@@ -64,40 +64,82 @@ void setup() {
   
   spawnRate = 60;
   
+  gameMode = 0;
+  
 }
 
 HUD hud;
 
 ArrayList<Bullet> bullets;
 
+int gameMode;
 
 void draw() {
   
   background(0);
-  for(int i = 0; i < directions.length; i++) {
+  
+  switch(gameMode) {
     
-    if(directions[i].display) {
+    case 0: {
       
-      background(directions[i].background);
+      mainMenu();
+      break;
+    }
+    case 1: {
       
+      for(int i = 0; i < directions.length; i++) {
+    
+        if(directions[i].display) {
+          
+          background(directions[i].background);
+          
+        }
+        
+      }
+      
+      //drawPlanets();
+  
+      spawnEnemies();
+      
+      p.update();
+      
+      
+      for(int i = 0; i < bullets.size(); i++) {
+        
+        bullets.get(i).display();
+        bullets.get(i).update();
+      }
+      
+      hud.display();
+      
+      break;
+    }
+    default: {
+      
+      break;
     }
     
   }
   
-  //drawPlanets();
+}
+
+void mainMenu() {
   
-  spawnEnemies();
+  fill(200);
+  textSize(height * 0.15f);
+  textAlign(CENTER, CENTER);
+  text("PROXIMITY", width / 2, height * 0.15);
   
-  p.update();
-  
-  
-  for(int i = 0; i < bullets.size(); i++) {
+  stroke(255);
+  noFill();
+  for(float i = 0; i < 3; i++) {
     
-    bullets.get(i).display();
-    bullets.get(i).update();
+    ellipse(width / 2, height / 2, width / 10 * (i + 0.5f), width / 10 * (i + 0.5f));
+    
   }
   
-  hud.display();
+  textSize(height * 0.05f);
+  text("PRESS START", width / 2, height * 0.85);
   
 }
 

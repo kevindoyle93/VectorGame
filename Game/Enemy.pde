@@ -153,6 +153,17 @@ class Enemy {
       
     }
     
+    if(!alive) {
+      
+      // Put something here as a destroyed animation. Like the separate lines falling apart or something
+      
+      boom.play(0);
+      p.score++;
+      
+      directions[view].enemies.remove(this);
+      
+    }
+    
   }
   
   void load() {
@@ -184,15 +195,6 @@ class Enemy {
       fill(130, 255, 80);
       
       ellipse(cent.x, cent.y, progress % 240, progress % 240);
-      
-    }
-    
-    if(!alive) {
-      
-      // Put something here as a destroyed animation. Like the separate lines falling apart or something
-      
-      boom.play(0);
-      directions[0].enemies.remove(this);
       
     }
     

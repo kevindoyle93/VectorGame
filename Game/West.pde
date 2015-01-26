@@ -50,7 +50,7 @@ class West extends Direction {
   
   void addEnemy() {
     
-    enemies.add(new Enemy(0));
+    enemies.add(new Enemy(view));
     
   }
   

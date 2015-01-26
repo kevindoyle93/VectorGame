@@ -198,6 +198,12 @@ class Player {
     
     if(checkKey(button1)) {
       
+      if(gameMode == 1) {
+        
+        gameMode = 2;
+        
+      }
+      
       if(coolDown > 10 && gun.ammo > 0) {
       
         if(count % 2 == 0) {
@@ -315,6 +321,16 @@ class Player {
           directions[i].cent.y = centre.y;
           
         }
+        
+      }
+      
+    }
+    
+    if(checkKey(start)) {
+      
+      if(gameMode == 0) {
+        
+        gameMode = 1;
         
       }
       

@@ -143,10 +143,46 @@ class HUD {
     
     fill(255);
     text("PROXIMITY:", points[13].x, (points[13].y - (points[0].y * 0.5)));
+    proximity();
     
     
     fill(255);
-    text("Score:", points[9].x, (points[13].y - (points[0].y * 0.5)));
+    text("SCORE: " + p.score, points[9].x, (points[13].y - (points[0].y * 0.5)));
+    
+  }
+  
+  void proximity() {
+    
+    color colour = color(200);
+    
+    for(int i = 0; i < directions.length; i++) {
+    
+      if(directions[i].enemies.size() > 0) {
+        
+        colour = color(0, 255, 0);
+        
+        if(directions[i].enemies.get(0).size > directions[i].enemies.get(0).maxSize / 4) {
+          
+          colour = color(255, 255, 0);
+          
+        }
+        if(directions[i].enemies.get(0).size > directions[i].enemies.get(0).maxSize / 2) {
+          
+          colour = color(255, 0, 0);
+          
+        }
+        
+      }
+      
+      stroke(colour);
+      fill(colour);
+      
+      float circX = points[13].x + ((points[12].x - points[13].x) / 2);
+      float circY = points[13].y - ((points[13].y - points[14].y) / 2);
+      float rad = (points[13].y - points[14].y) / 2;
+      
+      arc(circX, circY, rad, rad, (i * 2 + 5) * PI / 4, (i * 2 + 7) * PI / 4);
+    }
     
   }
  

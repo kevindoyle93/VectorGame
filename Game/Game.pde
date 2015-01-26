@@ -12,6 +12,7 @@ AudioPlayer gunSound;
 AudioPlayer boom;
 
 PVector centre;
+int gameMode;
 boolean[] keys = new boolean[526];
 Player p;
 PFont myFont;
@@ -72,8 +73,6 @@ HUD hud;
 
 ArrayList<Bullet> bullets;
 
-int gameMode;
-
 void draw() {
   
   background(0);
@@ -83,35 +82,18 @@ void draw() {
     case 0: {
       
       mainMenu();
+      p.update();
       break;
     }
     case 1: {
       
-      for(int i = 0; i < directions.length; i++) {
-    
-        if(directions[i].display) {
-          
-          background(directions[i].background);
-          
-        }
-        
-      }
-      
-      //drawPlanets();
-  
-      spawnEnemies();
-      
+      startScreen();
       p.update();
+      break;
+    }
+    case 2: {
       
-      
-      for(int i = 0; i < bullets.size(); i++) {
-        
-        bullets.get(i).display();
-        bullets.get(i).update();
-      }
-      
-      hud.display();
-      
+      gamePlay();
       break;
     }
     default: {
@@ -143,37 +125,51 @@ void mainMenu() {
   
 }
 
-PVector[] planets;
+void startScreen() {
+  
+  fill(200);
+  
+  String str1 = "PRESS BUTTON 1 TO BEGIN";
+  String str2 = "PRESS BUTTON 2 FOR INSTRUCTIONS";
+  
+  textSize(width / str2.length());
+  textAlign(CENTER, CENTER);
+  text(str1, width / 2, height / 3);
+  text(str2, width / 2, height / 3 * 2);
+  
+}
 
-void drawPlanets() {
+void gamePlay() {
   
-  int r, b, g;
-  
-  int size = height / 3;
-  
-  r = 255;
-  g = 0;
-  b = 0;
-  
-  stroke(r, b, g);
-  
-  for(int i = 0; i < planets.length; i++) {
+  for(int i = 0; i < directions.length; i++) {
     
-    for(int j = 0; j < 10; j++) {
-    
-      ellipse(planets[i].x, planets[i].y, size, size);
+      if(directions[i].display) {
+        
+        background(directions[i].background);
+        
+      }
       
-      size--;
+      directions[i].update();
       
     }
+
+    spawnEnemies();
     
-  }
-  
+    p.update();
+    
+    
+    for(int i = 0; i < bullets.size(); i++) {
+      
+      bullets.get(i).display();
+      bullets.get(i).update();
+    }
+    
+    hud.display();
 }
 
 void spawnEnemies() {
   
-  if((int)random(1, frameRate * 1000) < spawnRate) {
+  if(spawnRate > frameRate * 1.5f) {
     
     int rand = (int)random(0, 4);
     

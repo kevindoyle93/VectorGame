@@ -384,15 +384,17 @@ void addToScores() {
   
   highScores.remove(highScores.size() - 1);
   
-  String saveData = "";
+  String saveData = new String();
   
-  for(int i = 0; i < highScores.size(); i++) {
+  for(int i = 0; i < highScores.size() - 1; i++) {
     
     saveData = saveData + (highScores.get(i).name + "\t" + highScores.get(i).score + "\tend");
     
   }
   
-  String[] list = split(saveData, "end");
+  saveData = saveData + (highScores.get(highScores.size() - 1).name + "\t" + highScores.get((highScores.size() - 1)).score);
+  
+  String[] list = split(saveData, "\tend");
   
   saveStrings("/data/scores.txt", list);
   

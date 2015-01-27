@@ -18,7 +18,6 @@ Player p;
 PFont myFont;
 Gun gun;
 
-int spawnRate;
 
 Direction[] directions;
 
@@ -37,26 +36,19 @@ void setup() {
   
   centre = new PVector(width / 2, height / 2);
   
-  planets = new PVector[5];
-  
-  for(int i = 0; i < planets.length; i++) {
-    
-    planets[i] = new PVector(random(0, width), random(0, height));
-    
-  }
-  
   hud = new HUD(centre.x, centre.y);
-  
   
   bullets = new ArrayList<Bullet>();
   
   gun = new Gun();
   
   directions = new Direction[4];
-  directions[0] = new North();
-  directions[1] = new South();
-  directions[2] = new West();
-  directions[3] = new East();
+  
+  for(int i = 0; i < 4; i++) {
+    
+    directions[i] = new Direction(i);
+    
+  }
   
   directions[0].display = true;
   
@@ -95,6 +87,10 @@ void draw() {
       
       gamePlay();
       break;
+    }
+    case 3: {
+      
+      endScreen();
     }
     default: {
       
@@ -145,7 +141,7 @@ void gamePlay() {
     
       if(directions[i].display) {
         
-        background(directions[i].background);
+        //directions[i].drawBackground();
         
       }
       
@@ -154,9 +150,9 @@ void gamePlay() {
     }
 
     spawnEnemies();
+    spawnPowerUps();
     
     p.update();
-    
     
     for(int i = 0; i < bullets.size(); i++) {
       
@@ -166,6 +162,16 @@ void gamePlay() {
     
     hud.display();
 }
+
+void endScreen() {
+  
+  
+  
+  
+}
+
+
+int spawnRate;
 
 void spawnEnemies() {
   
@@ -178,6 +184,24 @@ void spawnEnemies() {
   }
   
   spawnRate++;
+  
+}
+
+void spawnPowerUps() {
+  
+  if(frameCount % 60 == 0) {
+  
+    int rand = (int)random(0, 100);
+      
+    if(rand < 5) {
+      
+      int view = (int)random(0, 4);
+      
+      directions[view].addPowerUp();
+      
+    }
+    
+  }
   
 }
 
@@ -218,7 +242,7 @@ char buttonNameToKey(XML xml, String buttonName)
   {
     return DOWN;
   }
-  //.. Others to follow
+  
   return value.charAt(0);  
 }
 

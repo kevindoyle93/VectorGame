@@ -235,6 +235,8 @@ class Enemy {
         
         p.health -= 10;
         
+        background(0, 255, 0);
+        
       }
       
     }

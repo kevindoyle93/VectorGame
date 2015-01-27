@@ -161,12 +161,12 @@ class HUD {
         
         colour = color(0, 255, 0);
         
-        if(directions[i].enemies.get(0).size > directions[i].enemies.get(0).maxSize / 4) {
+        if(directions[i].enemies.get(0).size > directions[i].enemies.get(0).maxSize / 6) {
           
           colour = color(255, 255, 0);
           
         }
-        if(directions[i].enemies.get(0).size > directions[i].enemies.get(0).maxSize / 2) {
+        if(directions[i].enemies.get(0).size > directions[i].enemies.get(0).maxSize / 3) {
           
           colour = color(255, 0, 0);
           

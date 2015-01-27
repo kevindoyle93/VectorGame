@@ -77,265 +77,267 @@ class Player {
   
   void update() {
     
-    if(checkKey(up)) {
+    switch(gameMode) {
       
-      for(int i = 0; i < directions.length; i++) {
+      case 0: {
         
-        if(directions[i].display) {
+        if(checkKey(start)) {
+            
+          coolDown = 0;
+          gameMode = 1;
+            
+        }
         
-          directions[i].cent.add(gameDown);
+        break;
+        
+      }
+      case 1: {
+        
+        if(checkKey(button1)) {
           
-          for(int j = 0; j < directions[i].enemies.size(); j++) {
+          gameMode = 2;
           
-            directions[i].enemies.get(j).cent.add(gameDown);
+        }
+        
+        break;
+        
+      }
+      case 2: {
+        
+        if(p.health == 0) {
+          
+          gameMode = 3;
+          
+        }
+    
+        if(checkKey(up)) {
+          
+          for(int i = 0; i < directions.length; i++) {
+            
+            if(directions[i].display) {
+            
+              directions[i].cent.add(gameDown);
+              
+              for(int j = 0; j < directions[i].enemies.size(); j++) {
+              
+                directions[i].enemies.get(j).cent.add(gameDown);
+              }
+              
+            }
+            
+          }
+          
+          for(int i = 0; i < bullets.size(); i++) {
+            
+            bullets.get(i).startPoint.add(gameDown);
+            bullets.get(i).endPoint.add(gameDown);
+            bullets.get(i).dest.add(gameDown);
+          }
+        }
+        
+        if(checkKey(down)) {
+          
+          for(int i = 0; i < directions.length; i++) {
+            
+            if(directions[i].display) {
+            
+              directions[i].cent.add(gameUp);
+              
+              for(int j = 0; j < directions[i].enemies.size(); j++) {
+              
+                directions[i].enemies.get(j).cent.add(gameUp);
+              }
+              
+            }
+            
+          }
+          
+          for(int i = 0; i < bullets.size(); i++) {
+            
+            bullets.get(i).startPoint.add(gameUp);
+            bullets.get(i).endPoint.add(gameUp);
           }
           
         }
         
-      }
-      
-      for(int i = 0; i < bullets.size(); i++) {
-        
-        bullets.get(i).startPoint.add(gameDown);
-        bullets.get(i).endPoint.add(gameDown);
-        bullets.get(i).dest.add(gameDown);
-      }
-      
-      for(int i = 0; i < planets.length; i++) {
-        
-        planets[i].add(gameDown);
-      }
-    }
-    
-    if(checkKey(down)) {
-      
-      for(int i = 0; i < directions.length; i++) {
-        
-        if(directions[i].display) {
-        
-          directions[i].cent.add(gameUp);
+        if(checkKey(left)) {
           
-          for(int j = 0; j < directions[i].enemies.size(); j++) {
+          for(int i = 0; i < directions.length; i++) {
+            
+            if(directions[i].display) {
+            
+              directions[i].cent.add(gameRight);
+              
+              for(int j = 0; j < directions[i].enemies.size(); j++) {
+              
+                directions[i].enemies.get(j).cent.add(gameRight);
+              }
+              
+            }
+            
+          }
           
-            directions[i].enemies.get(j).cent.add(gameUp);
+          for(int i = 0; i < bullets.size(); i++) {
+            
+            bullets.get(i).startPoint.add(gameRight);
+            bullets.get(i).endPoint.add(gameRight);
+            bullets.get(i).dest.add(gameRight);
+          }
+          
+        }    
+        
+        if(checkKey(right)) {
+          
+          for(int i = 0; i < directions.length; i++) {
+            
+            if(directions[i].display) {
+            
+              directions[i].cent.add(gameLeft);
+              
+              for(int j = 0; j < directions[i].enemies.size(); j++) {
+              
+                directions[i].enemies.get(j).cent.add(gameLeft);
+              }
+              
+            }
+            
+          }
+          
+          for(int i = 0; i < bullets.size(); i++) {
+            
+            bullets.get(i).startPoint.add(gameLeft);
+            bullets.get(i).endPoint.add(gameLeft);
+            bullets.get(i).dest.add(gameLeft);
           }
           
         }
         
-      }
-      
-      for(int i = 0; i < bullets.size(); i++) {
-        
-        bullets.get(i).startPoint.add(gameUp);
-        bullets.get(i).endPoint.add(gameUp);
-      }
-      
-      for(int i = 0; i < planets.length; i++) {
-        
-        planets[i].add(gameUp);
-      }
-    }
-    
-    if(checkKey(left)) {
-      
-      for(int i = 0; i < directions.length; i++) {
-        
-        if(directions[i].display) {
-        
-          directions[i].cent.add(gameRight);
+        if(checkKey(button1)) {
           
-          for(int j = 0; j < directions[i].enemies.size(); j++) {
+          if(coolDown > 10 && gun.ammo > 0) {
           
-            directions[i].enemies.get(j).cent.add(gameRight);
+            if(count % 2 == 0) {
+            
+              bullets.add(new Bullet(true));
+            }
+            else {
+            
+              bullets.add(new Bullet(false));
+            }
+            
+            gunSound.play(0);
+            count++;
+            gun.ammo--;
+            coolDown = 0;
+            
+          }
+        }
+          
+        if(checkKey(button2)) {
+          
+          gun.ammo = 40;
+          coolDown = -20;
+          
+        }
+        
+        if(checkKey(north)) {
+          
+          hud.view = 0;
+          
+          for(int i = 0; i < directions.length; i++) {
+            
+            if(i == hud.view) {
+              
+              directions[i].display = true;
+              
+            }
+            
+            else {
+              
+              directions[i].display = false;
+              directions[i].cent.x = centre.x;
+              directions[i].cent.y = centre.y;
+              
+            }
+            
           }
           
         }
         
-      }
-      
-      for(int i = 0; i < bullets.size(); i++) {
-        
-        bullets.get(i).startPoint.add(gameRight);
-        bullets.get(i).endPoint.add(gameRight);
-        bullets.get(i).dest.add(gameRight);
-      }
-      
-      for(int i = 0; i < planets.length; i++) {
-        
-        planets[i].add(gameRight);
-      }
-    }    
-    
-    if(checkKey(right)) {
-      
-      for(int i = 0; i < directions.length; i++) {
-        
-        if(directions[i].display) {
-        
-          directions[i].cent.add(gameLeft);
+        if(checkKey(south)) {
           
-          for(int j = 0; j < directions[i].enemies.size(); j++) {
+          hud.view = 1;
           
-            directions[i].enemies.get(j).cent.add(gameLeft);
+          for(int i = 0; i < directions.length; i++) {
+            
+            if(i == hud.view) {
+              
+              directions[i].display = true;
+              
+            }
+            
+            else {
+              
+              directions[i].display = false;
+              directions[i].cent.x = centre.x;
+              directions[i].cent.y = centre.y;
+              
+            }
+            
           }
           
         }
         
-      }
-      
-      for(int i = 0; i < bullets.size(); i++) {
-        
-        bullets.get(i).startPoint.add(gameLeft);
-        bullets.get(i).endPoint.add(gameLeft);
-        bullets.get(i).dest.add(gameLeft);
-      }
-      
-      for(int i = 0; i < planets.length; i++) {
-        
-        planets[i].add(gameLeft);
-      }
-    }
-    
-    if(checkKey(button1)) {
-      
-      if(gameMode == 1) {
-        
-        gameMode = 2;
-        
-      }
-      
-      if(coolDown > 10 && gun.ammo > 0) {
-      
-        if(count % 2 == 0) {
-        
-          bullets.add(new Bullet(true));
-        }
-        else {
-        
-          bullets.add(new Bullet(false));
-        }
-        
-        gunSound.play(0);
-        count++;
-        gun.ammo--;
-        coolDown = 0;
-        
-      }
-    }
-      
-    if(checkKey(button2)) {
-      
-      gun.ammo = 40;
-      coolDown = -20;
-      
-    }
-    
-    if(checkKey(north)) {
-      
-      hud.view = 0;
-      
-      for(int i = 0; i < directions.length; i++) {
-        
-        if(i == hud.view) {
+        if(checkKey(west)) {
           
-          directions[i].display = true;
+          hud.view = 2;
+          
+          for(int i = 0; i < directions.length; i++) {
+            
+            if(i == hud.view) {
+              
+              directions[i].display = true;
+              
+            }
+            
+            else {
+              
+              directions[i].display = false;
+              directions[i].cent.x = centre.x;
+              directions[i].cent.y = centre.y;
+              
+            }
+            
+          }
           
         }
         
-        else {
+        if(checkKey(east)) {
           
-          directions[i].display = false;
-          directions[i].cent.x = centre.x;
-          directions[i].cent.y = centre.y;
+          hud.view = 3;
           
-        }
-        
-      }
-      
-    }
-    
-    if(checkKey(south)) {
-      
-      hud.view = 1;
-      
-      for(int i = 0; i < directions.length; i++) {
-        
-        if(i == hud.view) {
-          
-          directions[i].display = true;
-          
-        }
-        
-        else {
-          
-          directions[i].display = false;
-          directions[i].cent.x = centre.x;
-          directions[i].cent.y = centre.y;
+          for(int i = 0; i < directions.length; i++) {
+            
+            if(i == hud.view) {
+              
+              directions[i].display = true;
+              
+            }
+            
+            else {
+              
+              directions[i].display = false;
+              directions[i].cent.x = centre.x;
+              directions[i].cent.y = centre.y;
+              
+            }
+            
+          }
           
         }
         
-      }
-      
-    }
-    
-    if(checkKey(west)) {
-      
-      hud.view = 2;
-      
-      for(int i = 0; i < directions.length; i++) {
-        
-        if(i == hud.view) {
-          
-          directions[i].display = true;
-          
-        }
-        
-        else {
-          
-          directions[i].display = false;
-          directions[i].cent.x = centre.x;
-          directions[i].cent.y = centre.y;
-          
-        }
-        
-      }
-      
-    }
-    
-    if(checkKey(east)) {
-      
-      hud.view = 3;
-      
-      for(int i = 0; i < directions.length; i++) {
-        
-        if(i == hud.view) {
-          
-          directions[i].display = true;
-          
-        }
-        
-        else {
-          
-          directions[i].display = false;
-          directions[i].cent.x = centre.x;
-          directions[i].cent.y = centre.y;
-          
-        }
-        
-      }
-      
-    }
-    
-    if(checkKey(start)) {
-      
-      if(gameMode == 0) {
-        
-        gameMode = 1;
-        
-      }
-      
-    }
-    
-    coolDown++;
-  }
-}
+        coolDown++;
+      } // end case 2
+    } // end switch()
+  } // end update()
+} // end Player

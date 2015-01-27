@@ -70,9 +70,9 @@ class Player {
         
         coolDown = 30;
         
-        score = 0;
+        score = 10;
         
-        health = 100;
+        health = 0;
   }
   
   void update() {
@@ -338,6 +338,68 @@ class Player {
         
         coolDown++;
       } // end case 2
+      case 3: {
+        
+        if(onTable) {
+          
+          if(textWait > 10) {
+          
+            if(checkKey(up) && letter[textChoice] < 'Z') {
+              
+              letter[textChoice]++;
+              
+            }
+            
+            if(checkKey(down) && letter[textChoice] > 'A') {
+              
+              letter[textChoice]--;
+              
+            }
+            
+            if(checkKey(left) && textChoice > 0) {
+              
+              textChoice--;
+              
+            }
+            
+            if(checkKey(right) && textChoice < 2) {
+              
+              textChoice++;
+              
+            }
+            
+            if(checkKey(start)){
+              
+              addToScores();
+              
+              gameMode = 4;
+              
+            }
+            
+            textWait = 0;
+            
+          }
+          
+        }
+        else {
+          
+          if(checkKey(start)) {
+            
+            gameMode = 1;
+            
+          }
+          
+          if(checkKey(button2)) {
+            
+            gameMode = 4;
+            
+          }
+          
+        }
+        
+        break;
+        
+      }
     } // end switch()
   } // end update()
 } // end Player

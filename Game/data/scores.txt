@@ -1,0 +1,6 @@
+KEV	100	
+AAA	10	
+BAA	10	
+EMM	0	
+EMM	0	
+

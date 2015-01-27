@@ -25,6 +25,8 @@ void setup() {
   
   setUpController();
   
+  readHighScores();
+  
   // Load music/sounds
   minim = new Minim(this);
   backgroundMusic = minim.loadFile("bgm.mp3");
@@ -59,6 +61,11 @@ void setup() {
   
   gameMode = 0;
   
+  letter = new char[3];
+  for(int i = 0; i < letter.length; i++) {
+    letter[i] = 'A';
+  }
+  
 }
 
 HUD hud;
@@ -74,30 +81,40 @@ void draw() {
     case 0: {
       
       mainMenu();
-      p.update();
       break;
     }
     case 1: {
       
       startScreen();
-      p.update();
       break;
     }
     case 2: {
       
       gamePlay();
       break;
+      
     }
     case 3: {
       
       endScreen();
+      break;
+      
+    }
+    case 4: {
+      
+      displayHighScores();
+      break;
+      
     }
     default: {
       
       break;
+      
     }
     
   }
+  
+  p.update();
   
 }
 
@@ -163,12 +180,54 @@ void gamePlay() {
     hud.display();
 }
 
+boolean onTable;
+
 void endScreen() {
   
+  fill(200);
+  textSize(height * 0.15f);
+  textAlign(CENTER, CENTER);
+  text("YOU LOSE", width / 2, height * 0.15);
   
+  textSize(height * 0.05f);
+  text("YOUR SCORE WAS", width / 2, height * 0.4);
+  text(p.score, width / 2, height * 0.5);
   
+  if(p.score > highScores.get(4).score) {
+    
+    onTable = true;
+    
+    text("ENTER YOUR NAME BELOW", width / 2, height * 0.7);
+    
+    readName();
+    
+  }
+  else {
+  
+    text("PRESS START TO RETURN TO THE MAIN MENU", width / 2, height * 0.7);
+    text("PRESS BUTTON 2 TO VIEW THE HIGH SCORES", width / 2, height * 0.8);
+    
+  }
   
 }
+
+void displayHighScores() {
+  
+  fill(200);
+  textSize(height * 0.15f);
+  textAlign(CENTER, CENTER);
+  text("HIGH SCORES", width / 2, height * 0.15);
+  
+  textSize(height * 0.05f);
+  //textAlign(LEFT, CENTER);
+  
+  for(int i = 0; i < highScores.size(); i++) {
+    
+    text((i + 1) + ".   " + highScores.get(i).name + "   " + highScores.get(i).score, width / 2, height / 10 * (3.5f + i));
+   
+  }
+ 
+} 
 
 
 int spawnRate;
@@ -255,4 +314,108 @@ void setUpController() {
   p = new Player(playerXML);
   
 }
+
+ArrayList<Score> highScores;
+
+void readHighScores() {
+  
+  highScores = new ArrayList<Score>();
+  
+  String scores[] = loadStrings("scores.txt");
+  
+  String name;
+  int score;
+  
+  for(int i = 0; i < scores.length; i++) {
     
+    String line[] = split(scores[i], "\t");
+    
+    name = line[0];
+    score = Integer.parseInt(line[1]);
+    
+    highScores.add(new Score(name, score));
+    
+  }
+  
+}
+
+int textChoice, textWait;
+char[] letter;
+
+void readName() {
+  
+  noFill();
+  
+  textSize(height * 0.08);
+  textAlign(CENTER, CENTER);
+  
+  float size = height / 10;
+  
+  for(int i = 0; i < letter.length; i++) {
+    
+    if(textChoice == i){
+      stroke(0, 255, 0);
+    }
+    else{
+      stroke(200);
+    }
+    
+    rect(width / 9 * (3.33f + i), height * 0.8f, size, size);
+    
+    text(letter[i], width / 9 * (3.59f + i), height * 0.85f);
+  }
+  
+  textWait++;
+  
+}
+
+void addToScores() {
+  
+  String name = "";
+  
+  for(int i = 0; i < letter.length; i++) {
+    
+    name = name + letter[i];
+    
+  }
+  
+  highScores.add(new Score(name, p.score));
+  sortScores();
+  
+  highScores.remove(highScores.size() - 1);
+  
+  String saveData = "";
+  
+  for(int i = 0; i < highScores.size(); i++) {
+    
+    saveData = saveData + (highScores.get(i).name + "\t" + highScores.get(i).score + "\tend");
+    
+  }
+  
+  String[] list = split(saveData, "end");
+  
+  saveStrings("/data/scores.txt", list);
+  
+}
+
+void sortScores() {
+  
+  Score temp;
+  
+  for(int i = 0; i < highScores.size(); i++) {
+    
+    for(int j = 1; j < highScores.size(); j++) {
+      
+      if(highScores.get(j).score > highScores.get(j - 1).score) {
+          
+          temp = highScores.get(j);
+          highScores.set(j, highScores.get(j - 1));
+          highScores.set(j - 1, temp);
+          
+        }
+        
+    }
+    
+  }
+  
+}

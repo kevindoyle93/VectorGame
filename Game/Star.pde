@@ -1,4 +1,4 @@
-class Star extends BackgroundObjects {
+class Star extends SpaceObjects {
   
   float theta, thetaInc;
   
@@ -6,8 +6,8 @@ class Star extends BackgroundObjects {
   
   Star() {
     
-    float x = random(0, width);
-    float y = random(0, height);
+    float x = random(-(width * 1.2f), width * 1.2f);
+    float y = random(-(height * 1.2f), height * 1.2f);
     
     cent = new PVector(x, y);
     

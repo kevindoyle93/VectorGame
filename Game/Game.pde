@@ -155,12 +155,6 @@ void startScreen() {
 void gamePlay() {
   
   for(int i = 0; i < directions.length; i++) {
-    
-      if(directions[i].display) {
-        
-        //directions[i].drawBackground();
-        
-      }
       
       directions[i].update();
       

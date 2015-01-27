@@ -6,13 +6,15 @@ class Direction {
   
   PVector cent;
   
-  int view;
+  int view, enemyCount;
   
-  ArrayList<Enemy> enemies;
+  ArrayList<SpaceObjects> spaceObjects;
   
-  ArrayList<PowerUp> powerUps;
+//  ArrayList<Enemy> enemies;
+//  
+//  ArrayList<PowerUp> powerUps;
   
-  ArrayList<BackgroundObjects> backgroundObjects;
+  //ArrayList<SpaceObjects> backgroundObjects;
   
   Direction(int view) {
     
@@ -20,35 +22,26 @@ class Direction {
     
     cent = new PVector(centre.x, centre.y);
     
-    enemies = new ArrayList<Enemy>();
+//    enemies = new ArrayList<Enemy>();
+//   
+//    powerUps = new ArrayList<PowerUp>();
+//    
+//    backgroundObjects = new ArrayList<BackgroundObjects>();
     
-    powerUps = new ArrayList<PowerUp>();
+    spaceObjects = new ArrayList<SpaceObjects>();
     
-    backgroundObjects = new ArrayList<BackgroundObjects>();
+    enemyCount = 0;
     
     makeBackground();
     
   }
   
   void display() {
-    
-    for(int i = 0; i < enemies.size(); i++) {
+
+    for(int i = 0; i < spaceObjects.size(); i++) {
       
-      enemies.get(i).display();
-      enemies.get(i).update();
-    }
-    
-    for(int i = 0; i < powerUps.size(); i++) {
-      
-      powerUps.get(i).display();
-      powerUps.get(i).update();
-      
-    }
-    
-    for(int i = 0; i < backgroundObjects.size(); i++) {
-      
-      backgroundObjects.get(i).display();
-      backgroundObjects.get(i).update();
+      spaceObjects.get(i).display();
+      spaceObjects.get(i).update();
       
     }
     
@@ -64,27 +57,27 @@ class Direction {
     
     Enemy temp;
     
-    for(int i = 0; i < enemies.size(); i++) {
-      
-      for(int j = 1; j < enemies.size(); j++) {
-        
-        if(enemies.get(j).size < enemies.get(j - 1).size) {
-          
-          temp = enemies.get(j);
-          enemies.set(j, enemies.get(j - 1));
-          enemies.set(j - 1, temp);
-          
-        }
-      }
-    }
+//    for(int i = 0; i < enemies.size(); i++) {
+//      
+//      for(int j = 1; j < enemies.size(); j++) {
+//        
+//        if(enemies.get(j).size < enemies.get(j - 1).size) {
+//          
+//          temp = enemies.get(j);
+//          enemies.set(j, enemies.get(j - 1));
+//          enemies.set(j - 1, temp);
+//          
+//        }
+//      }
+//    }
     
   }
   
   void makeBackground() {
     
-    for(int i = 0; i < 100; i++) {
+    for(int i = 0; i < width / 2; i++) {
       
-      backgroundObjects.add(new Star(view));
+      spaceObjects.add(new Star(view));
       
     }
     
@@ -92,13 +85,15 @@ class Direction {
   
   void addEnemy() {
     
-    enemies.add(new Enemy(view));
+    spaceObjects.add(new Enemy(view));
+    
+    enemyCount++;
     
   }
   
   void addPowerUp() {
     
-    powerUps.add(new Ammo(view));
+    spaceObjects.add(new Ammo(view));
     
   }
   

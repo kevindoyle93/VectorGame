@@ -1,4 +1,4 @@
-class BackgroundObjects {
+class SpaceObjects {
   
   PVector cent;
   

@@ -1,8 +1,4 @@
-class PowerUp {
-  
-  PVector cent;
-  
-  float size;
+class PowerUp extends SpaceObjects {
   
   color colour;
   

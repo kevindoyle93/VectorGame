@@ -154,17 +154,19 @@ class Bullet {
     
     for(int i = 0; i < directions.length; i++) {
     
-      for(int j = 0; j < directions[i].enemies.size(); j++) {
+      for(int j = 0; j < directions[i].spaceObjects.size(); j++) {
         
-        if(directions[i].enemies.get(j).lockedOn) {
+        if(directions[i].spaceObjects.get(j) instanceof Enemy) {
+          
+          Enemy temp = (Enemy)directions[i].spaceObjects.get(j);
       
           if(left) {
             
-            if(endPoint.x > (directions[i].enemies.get(j).cent.x - (directions[i].enemies.get(j).size * 1.5))) {
+            if(endPoint.x > (temp.cent.x - (temp.size * 1.5))) {
               
-              ret = check2(i, j);
+              ret = check2(i, j, temp);
                 
-              directions[i].enemies.get(j).alive = !ret;
+              temp.alive = !ret;
               
               return ret;
               
@@ -173,11 +175,11 @@ class Bullet {
         
           else {
             
-            if(endPoint.x < (directions[i].enemies.get(j).cent.x + (directions[i].enemies.get(j).size * 1.5))) {
+            if(endPoint.x < (temp.cent.x + (temp.size * 1.5))) {
               
-              ret = check2(i, j);
+              ret = check2(i, j, temp);
                 
-              directions[i].enemies.get(j).alive = !ret;
+              temp.alive = !ret;
               
               return ret;
               
@@ -195,13 +197,13 @@ class Bullet {
   }
   
   
-  boolean check2(int i, int j) {
+  boolean check2(int i, int j, Enemy temp) {
     
     boolean ret;
     
-    if(endPoint.y > (directions[i].enemies.get(j).cent.y - (directions[i].enemies.get(j).size / 2))) {
+    if(endPoint.y > (temp.cent.y - (temp.size / 2))) {
       
-      ret = check3(i, j);
+      ret = check3(i, j, temp);
       return ret;
       
     }
@@ -211,11 +213,11 @@ class Bullet {
     
   }
   
-  boolean check3(int i, int j) {
+  boolean check3(int i, int j, Enemy temp) {
     
     boolean ret;
     
-    if(endPoint.y < (directions[i].enemies.get(j).cent.y + (directions[i].enemies.get(j).size / 2))) {
+    if(endPoint.y < (temp.cent.y + (temp.size / 2))) {
       
       ret = true;
       return ret;
@@ -231,13 +233,19 @@ class Bullet {
     
     for(int i = 0; i < directions.length; i++) {
     
-      for(int j = 0; j < directions[i].enemies.size(); j++) {
+      for(int j = 0; j < directions[i].spaceObjects.size(); j++) {
         
-        if(directions[i].enemies.get(j).targeted) {
+        if(directions[i].spaceObjects.get(j) instanceof Enemy) {
+        
+          Enemy temp = (Enemy)directions[i].spaceObjects.get(j);
           
-          directions[i].enemies.get(j).lockedOn = true;
-          
-          break;
+          if(temp.targeted) {
+            
+            temp.lockedOn = true;
+            
+            break;
+            
+          }
           
         }
         

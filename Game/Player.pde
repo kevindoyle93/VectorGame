@@ -72,7 +72,7 @@ class Player {
         
         score = 10;
         
-        health = 10;
+        health = 100;
   }
   
   void update() {
@@ -118,9 +118,19 @@ class Player {
             
               directions[i].cent.add(gameDown);
               
-              for(int j = 0; j < directions[i].enemies.size(); j++) {
-              
-                directions[i].enemies.get(j).cent.add(gameDown);
+              for(int j = 0; j < directions[i].spaceObjects.size(); j++) {
+                
+                if(directions[i].spaceObjects.get(j) instanceof Enemy) {
+                  
+                  Enemy temp = (Enemy)directions[i].spaceObjects.get(j);
+                  temp.cent.add(gameDown);
+                }
+                else {
+                  
+                  directions[i].spaceObjects.get(j).cent.add(gameDown);
+                  
+                }
+                
               }
               
             }
@@ -143,9 +153,19 @@ class Player {
             
               directions[i].cent.add(gameUp);
               
-              for(int j = 0; j < directions[i].enemies.size(); j++) {
-              
-                directions[i].enemies.get(j).cent.add(gameUp);
+              for(int j = 0; j < directions[i].spaceObjects.size(); j++) {
+                
+                if(directions[i].spaceObjects.get(j) instanceof Enemy) {
+                  
+                  Enemy temp = (Enemy)directions[i].spaceObjects.get(j);
+                  temp.cent.add(gameUp);
+                }
+                else {
+                  
+                  directions[i].spaceObjects.get(j).cent.add(gameUp);
+                  
+                }
+                
               }
               
             }
@@ -168,9 +188,19 @@ class Player {
             
               directions[i].cent.add(gameRight);
               
-              for(int j = 0; j < directions[i].enemies.size(); j++) {
-              
-                directions[i].enemies.get(j).cent.add(gameRight);
+              for(int j = 0; j < directions[i].spaceObjects.size(); j++) {
+                
+                if(directions[i].spaceObjects.get(j) instanceof Enemy) {
+                  
+                  Enemy temp = (Enemy)directions[i].spaceObjects.get(j);
+                  temp.cent.add(gameRight);
+                }
+                else {
+                  
+                  directions[i].spaceObjects.get(j).cent.add(gameRight);
+                  
+                }
+                
               }
               
             }
@@ -194,9 +224,19 @@ class Player {
             
               directions[i].cent.add(gameLeft);
               
-              for(int j = 0; j < directions[i].enemies.size(); j++) {
-              
-                directions[i].enemies.get(j).cent.add(gameLeft);
+              for(int j = 0; j < directions[i].spaceObjects.size(); j++) {
+                
+                if(directions[i].spaceObjects.get(j) instanceof Enemy) {
+                  
+                  Enemy temp = (Enemy)directions[i].spaceObjects.get(j);
+                  temp.cent.add(gameLeft);
+                }
+                else {
+                  
+                  directions[i].spaceObjects.get(j).cent.add(gameLeft);
+                  
+                }
+                
               }
               
             }

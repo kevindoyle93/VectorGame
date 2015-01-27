@@ -157,18 +157,29 @@ class HUD {
     
     for(int i = 0; i < directions.length; i++) {
     
-      if(directions[i].enemies.size() > 0) {
+      if(directions[i].enemyCount > 0) {
         
         colour = color(0, 255, 0);
         
-        if(directions[i].enemies.get(0).size > directions[i].enemies.get(0).maxSize / 6) {
+        for(int j = 0; i < directions[i].spaceObjects.size(); j++) {
           
-          colour = color(255, 255, 0);
-          
-        }
-        if(directions[i].enemies.get(0).size > directions[i].enemies.get(0).maxSize / 3) {
-          
-          colour = color(255, 0, 0);
+          if(directions[i].spaceObjects.get(j) instanceof Enemy) {
+            
+            Enemy temp = (Enemy)directions[i].spaceObjects.get(j);
+        
+            if(temp.size > temp.maxSize / 6.0f) {
+              
+              colour = color(255, 255, 0);
+              
+            }
+            if(temp.size > temp.maxSize / 3.0f) {
+              
+              colour = color(255, 0, 0);
+              
+            }
+            
+            break;
+          }
           
         }
         

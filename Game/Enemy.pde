@@ -1,4 +1,4 @@
-class Enemy {
+class Enemy extends SpaceObjects {
   
   PVector cent;
   
@@ -160,7 +160,7 @@ class Enemy {
       boom.play(0);
       p.score++;
       
-      directions[view].enemies.remove(this);
+      directions[view].spaceObjects.remove(this);
       
     }
     

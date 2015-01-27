@@ -197,7 +197,7 @@ void endScreen() {
     
     onTable = true;
     
-    text("ENTER YOUR NAME BELOW", width / 2, height * 0.7);
+    text("ENTER YOUR NAME BELOW AND PRESS BUTTON 1", width / 2, height * 0.7);
     
     readName();
     
@@ -219,13 +219,14 @@ void displayHighScores() {
   text("HIGH SCORES", width / 2, height * 0.15);
   
   textSize(height * 0.05f);
-  //textAlign(LEFT, CENTER);
   
   for(int i = 0; i < highScores.size(); i++) {
     
     text((i + 1) + ".   " + highScores.get(i).name + "   " + highScores.get(i).score, width / 2, height / 10 * (3.5f + i));
    
   }
+  
+  text("PRESS START TO RETURN TO THE MAIN MENU", width / 2, height * 0.9f);
  
 } 
 

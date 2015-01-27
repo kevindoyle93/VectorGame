@@ -12,6 +12,8 @@ class Direction {
   
   ArrayList<PowerUp> powerUps;
   
+  ArrayList<BackgroundObjects> backgroundObjects;
+  
   Direction(int view) {
     
     display = false;
@@ -21,6 +23,10 @@ class Direction {
     enemies = new ArrayList<Enemy>();
     
     powerUps = new ArrayList<PowerUp>();
+    
+    backgroundObjects = new ArrayList<BackgroundObjects>();
+    
+    makeBackground();
     
   }
   
@@ -36,6 +42,13 @@ class Direction {
       
       powerUps.get(i).display();
       powerUps.get(i).update();
+      
+    }
+    
+    for(int i = 0; i < backgroundObjects.size(); i++) {
+      
+      backgroundObjects.get(i).display();
+      backgroundObjects.get(i).update();
       
     }
     
@@ -63,6 +76,16 @@ class Direction {
           
         }
       }
+    }
+    
+  }
+  
+  void makeBackground() {
+    
+    for(int i = 0; i < 100; i++) {
+      
+      backgroundObjects.add(new Star(view));
+      
     }
     
   }

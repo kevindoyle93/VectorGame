@@ -72,7 +72,7 @@ class Player {
         
         score = 10;
         
-        health = 0;
+        health = 10;
   }
   
   void update() {
@@ -368,7 +368,7 @@ class Player {
               
             }
             
-            if(checkKey(start)){
+            if(checkKey(button1)){
               
               addToScores();
               
@@ -399,7 +399,18 @@ class Player {
         
         break;
         
+      } // end case 3:
+      
+      case 4: {
+        
+        if(checkKey(start)){
+          
+          gameMode = 1;
+          
+        }
+        
       }
+      
     } // end switch()
   } // end update()
 } // end Player

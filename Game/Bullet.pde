@@ -167,7 +167,6 @@ class Bullet {
               ret = check2(i, j, temp);
                 
               temp.alive = !ret;
-              
               return ret;
               
             }

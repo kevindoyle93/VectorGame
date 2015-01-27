@@ -377,6 +377,9 @@ class Player {
         }
         
         coolDown++;
+        
+        break;
+        
       } // end case 2
       case 3: {
         

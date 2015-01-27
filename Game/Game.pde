@@ -159,19 +159,19 @@ void gamePlay() {
       directions[i].update();
       
     }
-
-    spawnEnemies();
-    spawnPowerUps();
     
-    p.update();
+  for(int i = 0; i < bullets.size(); i++) {
     
-    for(int i = 0; i < bullets.size(); i++) {
-      
-      bullets.get(i).display();
-      bullets.get(i).update();
-    }
-    
-    hud.display();
+    bullets.get(i).display();
+    bullets.get(i).update();
+  }
+  
+  hud.display();
+  
+  p.update();
+  
+  spawnEnemies();
+  spawnPowerUps();
 }
 
 boolean onTable;

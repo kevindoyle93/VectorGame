@@ -10,23 +10,12 @@ class Direction {
   
   ArrayList<SpaceObjects> spaceObjects;
   
-//  ArrayList<Enemy> enemies;
-//  
-//  ArrayList<PowerUp> powerUps;
-  
-  //ArrayList<SpaceObjects> backgroundObjects;
   
   Direction(int view) {
     
     display = false;
     
     cent = new PVector(centre.x, centre.y);
-    
-//    enemies = new ArrayList<Enemy>();
-//   
-//    powerUps = new ArrayList<PowerUp>();
-//    
-//    backgroundObjects = new ArrayList<BackgroundObjects>();
     
     spaceObjects = new ArrayList<SpaceObjects>();
     
@@ -50,6 +39,8 @@ class Direction {
   void update() {
     
     sortEnemies();
+    
+    removeEnemies();
     
   }
   
@@ -86,8 +77,23 @@ class Direction {
   void addEnemy() {
     
     spaceObjects.add(new Enemy(view));
+    spaceObjects.get(spaceObjects.size() - 1).alive = true;
     
     enemyCount++;
+    
+  }
+  
+  void removeEnemies() {
+    
+    for(int i = 0; i < spaceObjects.size(); i++) {
+      
+      if(spaceObjects.get(i).alive == false) {
+        
+        spaceObjects.remove(spaceObjects.get(i));
+        
+      }
+      
+    }
     
   }
   

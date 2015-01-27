@@ -153,47 +153,47 @@ class HUD {
   
   void proximity() {
     
-    color colour = color(200);
-    
-    for(int i = 0; i < directions.length; i++) {
-    
-      if(directions[i].enemyCount > 0) {
-        
-        colour = color(0, 255, 0);
-        
-        for(int j = 0; i < directions[i].spaceObjects.size(); j++) {
-          
-          if(directions[i].spaceObjects.get(j) instanceof Enemy) {
-            
-            Enemy temp = (Enemy)directions[i].spaceObjects.get(j);
-        
-            if(temp.size > temp.maxSize / 6.0f) {
-              
-              colour = color(255, 255, 0);
-              
-            }
-            if(temp.size > temp.maxSize / 3.0f) {
-              
-              colour = color(255, 0, 0);
-              
-            }
-            
-            break;
-          }
-          
-        }
-        
-      }
-      
-      stroke(colour);
-      fill(colour);
-      
-      float circX = points[13].x + ((points[12].x - points[13].x) / 2);
-      float circY = points[13].y - ((points[13].y - points[14].y) / 2);
-      float rad = (points[13].y - points[14].y) / 2;
-      
-      arc(circX, circY, rad, rad, (i * 2 + 5) * PI / 4, (i * 2 + 7) * PI / 4);
-    }
+//    color colour = color(200);
+//    
+//    for(int i = 0; i < directions.length; i++) {
+//    
+//      if(directions[i].enemyCount > 0) {
+//        
+//        colour = color(0, 255, 0);
+//        
+//        for(int j = 0; i < directions[i].spaceObjects.size(); j++) {
+//          
+//          if(directions[i].spaceObjects.get(j) instanceof Enemy) {
+//            
+//            Enemy temp = (Enemy)directions[i].spaceObjects.get(j);
+//        
+//            if(temp.size > temp.maxSize / 6.0f) {
+//              
+//              colour = color(255, 255, 0);
+//              
+//            }
+//            if(temp.size > temp.maxSize / 3.0f) {
+//              
+//              colour = color(255, 0, 0);
+//              
+//            }
+//            
+//            break;
+//          }
+//          
+//        }
+//        
+//      }
+//      
+//      stroke(colour);
+//      fill(colour);
+//      
+//      float circX = points[13].x + ((points[12].x - points[13].x) / 2);
+//      float circY = points[13].y - ((points[13].y - points[14].y) / 2);
+//      float rad = (points[13].y - points[14].y) / 2;
+//      
+//      arc(circX, circY, rad, rad, (i * 2 + 5) * PI / 4, (i * 2 + 7) * PI / 4);
+//    }
     
   }
  

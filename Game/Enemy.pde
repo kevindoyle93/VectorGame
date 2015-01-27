@@ -99,8 +99,6 @@ class Enemy extends SpaceObjects {
   
   void update() {
     
-    //calcSpeed();
-    
     checkTargeted();
     
     
@@ -157,10 +155,10 @@ class Enemy extends SpaceObjects {
       
       // Put something here as a destroyed animation. Like the separate lines falling apart or something
       
-      boom.play(0);
+      //boom.play(0);
       p.score++;
       
-      directions[view].spaceObjects.remove(this);
+      //directions[view].spaceObjects.remove((Enemy)this);
       
     }
     
@@ -200,22 +198,6 @@ class Enemy extends SpaceObjects {
     
   }
   
-  void calcSpeed() {
-    
-    if(speed == 0.0f) {
-      
-      speed = 0.5f;
-      println("");
-      return;
-    }
-    
-    float percentage;
-    
-    percentage = (size / maxSize) * 200.0f;
-    
-    speed = maxSpeed / 100.0f * percentage;
-    println(speed);
-  }
   
   void shoot() {
     

@@ -15,6 +15,8 @@ class Star extends SpaceObjects {
     
     size = random(width * 0.002, width * 0.001);
     
+    alive = true;
+    
   }
   
   Star(int view) {

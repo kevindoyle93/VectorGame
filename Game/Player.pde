@@ -1,14 +1,10 @@
 class Player {
   
-  String name;
-  
-  int score;
-  
-  int health;
+  int health, score, ammo;
   
   float speed;
   
-  int coolDown;
+  int count, coolDown;
   
   char up;
   char down;
@@ -70,9 +66,13 @@ class Player {
         
         coolDown = 30;
         
+        count = 0;
+        
         score = 0;
         
-        health = 20;
+        health = 100;
+        
+        ammo = 40;
         
   }
   
@@ -113,27 +113,19 @@ class Player {
         }
     
         if(checkKey(up)) {
+            
+          directions[hud.view].cent.add(gameUp);
           
-          for(int i = 0; i < directions.length; i++) {
+          for(int i = 0; i < directions[hud.view].spaceObjects.size(); i++) {
             
-            if(directions[i].display) {
-            
-              directions[i].cent.add(gameUp);
+            if(directions[hud.view].spaceObjects.get(i) instanceof Enemy) {
               
-              for(int j = 0; j < directions[i].spaceObjects.size(); j++) {
-                
-                if(directions[i].spaceObjects.get(j) instanceof Enemy) {
-                  
-                  Enemy temp = (Enemy)directions[i].spaceObjects.get(j);
-                  temp.cent.add(gameUp);
-                }
-                else {
-                  
-                  directions[i].spaceObjects.get(j).cent.add(gameUp);
-                  
-                }
-                
-              }
+              Enemy temp = (Enemy)directions[hud.view].spaceObjects.get(i);
+              temp.cent.add(gameUp);
+            }
+            else {
+              
+              directions[hud.view].spaceObjects.get(i).cent.add(gameUp);
               
             }
             
@@ -144,31 +136,25 @@ class Player {
             bullets.get(i).startPoint.add(gameUp);
             bullets.get(i).endPoint.add(gameUp);
             bullets.get(i).dest.add(gameUp);
+            
           }
+          
         }
         
         if(checkKey(down)) {
           
-          for(int i = 0; i < directions.length; i++) {
+          directions[hud.view].cent.add(gameDown);
+          
+          for(int i = 0; i < directions[hud.view].spaceObjects.size(); i++) {
             
-            if(directions[i].display) {
-            
-              directions[i].cent.add(gameDown);
+            if(directions[hud.view].spaceObjects.get(i) instanceof Enemy) {
               
-              for(int j = 0; j < directions[i].spaceObjects.size(); j++) {
-                
-                if(directions[i].spaceObjects.get(j) instanceof Enemy) {
-                  
-                  Enemy temp = (Enemy)directions[i].spaceObjects.get(j);
-                  temp.cent.add(gameDown);
-                }
-                else {
-                  
-                  directions[i].spaceObjects.get(j).cent.add(gameDown);
-                  
-                }
-                
-              }
+              Enemy temp = (Enemy)directions[hud.view].spaceObjects.get(i);
+              temp.cent.add(gameDown);
+            }
+            else {
+              
+              directions[hud.view].spaceObjects.get(i).cent.add(gameDown);
               
             }
             
@@ -178,32 +164,26 @@ class Player {
             
             bullets.get(i).startPoint.add(gameDown);
             bullets.get(i).endPoint.add(gameDown);
+            bullets.get(i).dest.add(gameDown);
+            
           }
           
         }
         
         if(checkKey(left)) {
           
-          for(int i = 0; i < directions.length; i++) {
+          directions[hud.view].cent.add(gameLeft);
+          
+          for(int i = 0; i < directions[hud.view].spaceObjects.size(); i++) {
             
-            if(directions[i].display) {
-            
-              directions[i].cent.add(gameLeft);
+            if(directions[hud.view].spaceObjects.get(i) instanceof Enemy) {
               
-              for(int j = 0; j < directions[i].spaceObjects.size(); j++) {
-                
-                if(directions[i].spaceObjects.get(j) instanceof Enemy) {
-                  
-                  Enemy temp = (Enemy)directions[i].spaceObjects.get(j);
-                  temp.cent.add(gameLeft);
-                }
-                else {
-                  
-                  directions[i].spaceObjects.get(j).cent.add(gameLeft);
-                  
-                }
-                
-              }
+              Enemy temp = (Enemy)directions[hud.view].spaceObjects.get(i);
+              temp.cent.add(gameLeft);
+            }
+            else {
+              
+              directions[hud.view].spaceObjects.get(i).cent.add(gameLeft);
               
             }
             
@@ -214,32 +194,25 @@ class Player {
             bullets.get(i).startPoint.add(gameLeft);
             bullets.get(i).endPoint.add(gameLeft);
             bullets.get(i).dest.add(gameLeft);
+            
           }
           
         }    
         
         if(checkKey(right)) {
           
-          for(int i = 0; i < directions.length; i++) {
+          directions[hud.view].cent.add(gameRight);
+          
+          for(int i = 0; i < directions[hud.view].spaceObjects.size(); i++) {
             
-            if(directions[i].display) {
-            
-              directions[i].cent.add(gameRight);
+            if(directions[hud.view].spaceObjects.get(i) instanceof Enemy) {
               
-              for(int j = 0; j < directions[i].spaceObjects.size(); j++) {
-                
-                if(directions[i].spaceObjects.get(j) instanceof Enemy) {
-                  
-                  Enemy temp = (Enemy)directions[i].spaceObjects.get(j);
-                  temp.cent.add(gameRight);
-                }
-                else {
-                  
-                  directions[i].spaceObjects.get(j).cent.add(gameRight);
-                  
-                }
-                
-              }
+              Enemy temp = (Enemy)directions[hud.view].spaceObjects.get(i);
+              temp.cent.add(gameRight);
+            }
+            else {
+              
+              directions[hud.view].spaceObjects.get(i).cent.add(gameRight);
               
             }
             
@@ -250,13 +223,14 @@ class Player {
             bullets.get(i).startPoint.add(gameRight);
             bullets.get(i).endPoint.add(gameRight);
             bullets.get(i).dest.add(gameRight);
+            
           }
           
         }
         
         if(checkKey(button1)) {
           
-          if(coolDown > 10 && gun.ammo > 0) {
+          if(coolDown > 10 && p.ammo > 0) {
           
             if(count % 2 == 0) {
             
@@ -269,7 +243,7 @@ class Player {
             
             gunSound.play(0);
             count++;
-            gun.ammo--;
+            p.ammo--;
             coolDown = 0;
             
           }
@@ -287,7 +261,7 @@ class Player {
               
                 if(directions[hud.view].spaceObjects.get(i) instanceof Ammo) {
                   
-                  gun.ammo = 40;
+                  p.ammo = 40;
                   
                 }
                 else if(directions[hud.view].spaceObjects.get(i) instanceof SlowSpeed) {

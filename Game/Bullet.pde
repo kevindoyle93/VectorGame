@@ -1,30 +1,24 @@
 class Bullet {
   
-  PVector origin;
+  PVector startPoint;  // start of bullet
   
-  PVector startPoint;
+  PVector dest;        // destination of bullet
   
-  PVector dest;
+  PVector endPoint;    // end of bullet
   
-  PVector endPoint;
+  PVector movement;    // vector to be added to startPoint for movement
   
-  PVector movement;
+  float l;             // length of the bullet
   
-  float l;
+  float lDec;          // decrements length to simulate 3D
   
-  PVector len;
-  
-  float lDec;
-  
-  float theta;
-  
-  boolean left;
+  boolean left;        // whether the bullet is coming from the left or right
   
   float speed;
   
   boolean alive;
   
-  boolean onTarget;
+  boolean onTarget;    // whether or not a bullet, when shot, is on target to hit an enemy
   
   Bullet(boolean left) {
     
@@ -32,18 +26,14 @@ class Bullet {
     
     if(left) {
       
-      origin = new PVector(hud.points[15].x, centre.y);
-      
-      startPoint = origin.get();
+      startPoint = new PVector(hud.points[15].x, centre.y);
     
       movement = new PVector(speed, 0);
       
     }
     else {
       
-      origin = new PVector(hud.points[6].x, centre.y);
-      
-      startPoint = origin.get();
+      startPoint = new PVector(hud.points[6].x, centre.y);
     
       movement = new PVector(-speed, 0);
       
@@ -55,15 +45,11 @@ class Bullet {
     
     l = width / 30.0f;
     
-    len = new PVector(l, 0);
-    
     alive = true;
     
     this.left = left;
     
     lDec = speed / 10.0f;
-    
-    theta = PI;
     
     checkTarget();
     
@@ -88,10 +74,6 @@ class Bullet {
   }
   
   void update() {
-    
-    // Find the angle of the line from the gun's corner to the crosshair
-    // Move along that line, decreasing the length of the bullet as it goes
-    // Change alive to false if you it hits an enemy or dies
     
     startPoint.add(movement);
     
@@ -144,42 +126,39 @@ class Bullet {
     
     boolean ret;
     
-    for(int i = 0; i < directions.length; i++) {
-    
-      for(int j = 0; j < directions[i].spaceObjects.size(); j++) {
-        
-        if(directions[i].spaceObjects.get(j) instanceof Enemy && onTarget) {
-          
-          Enemy temp = (Enemy)directions[i].spaceObjects.get(j);
+    for(int i = 0; i < directions[hud.view].spaceObjects.size(); i++) {
       
-          if(left && temp.lockedOn) {
+      if(directions[hud.view].spaceObjects.get(i) instanceof Enemy && onTarget) {
+        
+        Enemy temp = (Enemy)directions[hud.view].spaceObjects.get(i);
+    
+        if(left && temp.lockedOn) {
+          
+          if(temp.cent.x - endPoint.x < temp.size / 2 && (temp.cent.y - endPoint.y < temp.size / 2 && endPoint.y - temp.cent.y < temp.size / 2)) {
             
-            if(temp.cent.x - endPoint.x < temp.size / 2 && (temp.cent.y - endPoint.y < temp.size / 2 && endPoint.y - temp.cent.y < temp.size / 2)) {
+            ret = true;
               
-              ret = true;
-                
-              directions[i].spaceObjects.get(j).alive = !ret;
+            directions[hud.view].spaceObjects.get(i).alive = !ret;
+            
+            return ret;
+            
+          }
+        }
+      
+        else if(!left && temp.lockedOn) {
+          
+          if(endPoint.x - temp.cent.x < temp.size / 2 && (temp.cent.y - endPoint.y < temp.size / 2 && endPoint.y - temp.cent.y < temp.size / 2)) {
+            
+            ret = true;
               
-              return ret;
-              
-            }
+            directions[hud.view].spaceObjects.get(i).alive = !ret;
+            
+            return ret;
+            
           }
         
-          else if(!left && temp.lockedOn) {
-            
-            if(endPoint.x - temp.cent.x < temp.size / 2 && (temp.cent.y - endPoint.y < temp.size / 2 && endPoint.y - temp.cent.y < temp.size / 2)) {
-              
-              ret = true;
-                
-              directions[i].spaceObjects.get(j).alive = !ret;
-              
-              return ret;
-              
-            }
-          
-          }
-          
         }
+        
       }
     }
     

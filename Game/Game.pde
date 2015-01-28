@@ -16,10 +16,14 @@ int gameMode;
 boolean[] keys = new boolean[526];
 Player p;
 PFont myFont;
-Gun gun;
 
 
 Direction[] directions;
+
+HUD hud;
+
+ArrayList<Bullet> bullets;
+
 
 void setup() {
   
@@ -42,8 +46,6 @@ void setup() {
   
   //bullets = new ArrayList<Bullet>();
   
-  gun = new Gun();
-  
   directions = new Direction[4];
   
   myFont = createFont("Rod", 20);
@@ -52,10 +54,6 @@ void setup() {
   gameMode = 0;
   
 }
-
-HUD hud;
-
-ArrayList<Bullet> bullets;
 
 void draw() {
   
@@ -107,6 +105,7 @@ void setupGame() {
   
   p.score = 0;
   p.health = 100;
+  p.ammo = 40;
   p.coolDown = 0;
   
   enemySpawnRate = 120;
@@ -285,7 +284,6 @@ void spawnPowerUps() {
   
 }
 
-int count = 99;
 
 void keyPressed()
 {

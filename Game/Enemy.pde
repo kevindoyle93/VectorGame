@@ -1,16 +1,10 @@
 class Enemy extends SpaceObjects {
   
-  PVector cent;
-  
-  PVector[] move;
-  
-  PVector up, down, left, right, lUp, rUp, lDown, rDown;
-  
   float maxDist;
   
   float size, maxSize;
   
-  float speed, maxSpeed;
+  float speed;
   
   int count;
   
@@ -30,8 +24,6 @@ class Enemy extends SpaceObjects {
   
   boolean alive;
   
-  int view;
-  
   Enemy(int view) {
     
     alive = true;
@@ -44,7 +36,6 @@ class Enemy extends SpaceObjects {
     
     size = 0;
     speed = 0.5f;
-    maxSpeed = 1.0f;
     
     move = new PVector[8];
     
@@ -57,9 +48,9 @@ class Enemy extends SpaceObjects {
     move[6] = new PVector(-(speed / 2.0f), speed / 2.0f);
     move[7] = new PVector(speed / 2.0f, speed / 2.0f);
     
-    count = 30; //half of 60fps
+    count = 30;
     
-    coolDown = (int)random(0, 120);
+    coolDown = (int)random(0, 120);  // different enemies have different cool down periods
     
     loadTime = 240.0f;
     

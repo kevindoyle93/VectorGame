@@ -15,13 +15,13 @@ class Direction {
     
     this.view = view;
     
+    enemyCount = 0;
+    
     display = false;
     
     cent = new PVector(centre.x, centre.y);
     
     spaceObjects = new ArrayList<SpaceObjects>();
-    
-    enemyCount = 0;
     
     makeBackground();
     
@@ -45,55 +45,13 @@ class Direction {
       
     }
     
-    //sortEnemies();
-    
     removeEnemies();
     
   }
   
-  /* The enemies are sorted here so that the bigger (i.e. closer) enemies get displayed on top of smaller ones
-  void sortEnemies() {
-    
-    ArrayList<Enemy> enemies = new ArrayList<Enemy>();
-    
-    for(int i = 0; i < spaceObjects.size(); i++) {
-      
-      if(spaceObjects.get(i) instanceof Enemy) {
-        
-        enemies.add((Enemy)spaceObjects.get(i));
-        
-        spaceObjects.remove(i);
-        
-      }
-      
-    }
-    
-    Enemy temp;
-    
-    for(int i = 0; i < enemies.size(); i++) {
-      
-      for(int j = 1; j < enemies.size(); j++) {
-        
-        if(enemies.get(j).size < enemies.get(j - 1).size) {
-          temp = enemies.get(j);
-          enemies.set(j, enemies.get(j - 1));
-          enemies.set(j - 1, temp);
-          
-        }
-      }
-    }
-    
-    for(int i = 0; i < enemies.size(); i++) {
-      
-      spaceObjects.add(enemies.get(i));
-      
-    }
-    
-  }*/
-  
   void makeBackground() {
     
-    for(int i = 0; i < width / 2; i++) {
+    for(int i = 0; i < width / 3; i++) {
       
       spaceObjects.add(new Star(view));
       
@@ -121,13 +79,10 @@ class Direction {
           p.score++;
           
         }
-        else {
-          
-          //powerup
-          
-        }
         
         spaceObjects.remove(spaceObjects.get(i));
+        
+        enemyCount--;
         
       }
       
@@ -138,13 +93,19 @@ class Direction {
   void addPowerUp(int type) {
     
     if(type == 0) {
+      
       spaceObjects.add(new Ammo(view));
+      
     }
     else if(type == 1) {
+      
       spaceObjects.add(new SlowSpeed(view));
+      
     }
     else if(type == 2) {
+      
       spaceObjects.add(new SlowSpawn(view));
+      
     }
     
   }

@@ -13,7 +13,7 @@ class Star extends SpaceObjects {
     
     points = 5;
     
-    size = random(width * 0.002, width * 0.001);
+    size = random(width * 0.003, width * 0.0013);
     
     alive = true;
     

@@ -133,9 +133,8 @@ class HUD {
     text("AMMO:", points[4].x, (points[15].y - (points[0].y * 0.5)));
     
     fill(255, 0, 0);
-    for(int i = 0; i < gun.ammo; i++) {
+    for(int i = 0; i < p.ammo; i++) {
       
-      // I think I can use a transform here
       rect(points[4].x + ((points[5].x - points[4].x) / 4) + (ammoGap * i), points[0].y + ((points[15].y - points[0].y) / 3), ammoWidth, ammoHeight);
     }
     
@@ -151,47 +150,37 @@ class HUD {
   
   void proximity() {
     
-//    color colour = color(200);
-//    
-//    for(int i = 0; i < directions.length; i++) {
-//    
-//      if(directions[i].enemyCount > 0) {
-//        
-//        colour = color(0, 255, 0);
-//        
-//        for(int j = 0; i < directions[i].spaceObjects.size(); j++) {
-//          
-//          if(directions[i].spaceObjects.get(j) instanceof Enemy) {
-//            
-//            Enemy temp = (Enemy)directions[i].spaceObjects.get(j);
-//        
-//            if(temp.size > temp.maxSize / 6.0f) {
-//              
-//              colour = color(255, 255, 0);
-//              
-//            }
-//            if(temp.size > temp.maxSize / 3.0f) {
-//              
-//              colour = color(255, 0, 0);
-//              
-//            }
-//            
-//            break;
-//          }
-//          
-//        }
-//        
-//      }
-//      
-//      stroke(colour);
-//      fill(colour);
-//      
-//      float circX = points[13].x + ((points[12].x - points[13].x) / 2);
-//      float circY = points[13].y - ((points[13].y - points[14].y) / 2);
-//      float rad = (points[13].y - points[14].y) / 2;
-//      
-//      arc(circX, circY, rad, rad, (i * 2 + 5) * PI / 4, (i * 2 + 7) * PI / 4);
-//    }
+    for(int i = 0; i < 4; i++) {
+      
+      color colour = color(200);
+    
+      if(directions[i].enemyCount > 0) {
+        
+        colour = color(0, 255, 0);
+        
+      }
+    
+      if(directions[i].enemyCount > 5) {
+        
+        colour = color(255, 255, 0);
+        
+      }
+      
+      if(directions[i].enemyCount > 10) {
+        
+        colour = color(255, 0, 0);
+        
+      }
+      
+      stroke(colour);
+      fill(colour);
+      
+      float circX = points[13].x + ((points[12].x - points[13].x) / 2);
+      float circY = points[13].y - ((points[13].y - points[14].y) / 2);
+      float rad = (points[13].y - points[14].y) / 2;
+      
+      arc(circX, circY, rad, rad, (i * 2 + 5) * PI / 4, (i * 2 + 7) * PI / 4);
+    }
     
   }
  

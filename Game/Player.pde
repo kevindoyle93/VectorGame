@@ -83,8 +83,7 @@ class Player {
       case 0: {
         
         if(checkKey(start)) {
-            
-          coolDown = 0;
+           
           gameMode = 1;
             
         }
@@ -97,6 +96,8 @@ class Player {
         if(checkKey(button1)) {
           
           gameMode = 2;
+          
+          setupGame();
           
         }
         

@@ -40,19 +40,11 @@ void setup() {
   
   hud = new HUD(centre.x, centre.y);
   
-  bullets = new ArrayList<Bullet>();
+  //bullets = new ArrayList<Bullet>();
   
   gun = new Gun();
   
   directions = new Direction[4];
-  
-  for(int i = 0; i < 4; i++) {
-    
-    directions[i] = new Direction(i);
-    
-  }
-  
-  directions[0].display = true;
   
   myFont = createFont("Rod", 20);
   textFont(myFont);
@@ -60,11 +52,6 @@ void setup() {
   spawnRate = 60;
   
   gameMode = 0;
-  
-  letter = new char[3];
-  for(int i = 0; i < letter.length; i++) {
-    letter[i] = 'A';
-  }
   
 }
 
@@ -115,6 +102,32 @@ void draw() {
   }
   
   p.update();
+  
+}
+
+void setupGame() {
+  
+  p.score = 0;
+  p.health = 100;
+  p.coolDown = 0;
+  
+  bullets = new ArrayList<Bullet>();
+  
+  for(int i = 0; i < 4; i++) {
+    
+    directions[i] = new Direction(i);
+    
+  }
+  
+  directions[0].display = true;
+  
+  letter = new char[3];
+  
+  for(int i = 0; i < letter.length; i++) {
+    
+    letter[i] = 'A';
+    
+  }
   
 }
 

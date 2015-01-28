@@ -87,6 +87,12 @@ void draw() {
       break;
       
     }
+    case 5: {
+      
+      instructions();
+      break;
+      
+    }
     default: {
       
       break;
@@ -163,6 +169,95 @@ void startScreen() {
   
 }
 
+int page, pageWait;
+
+void instructions() {
+  
+  hud.display();
+  
+  fill(200);
+  textSize(height * 0.03f);
+  
+  switch(page) {
+    
+    case 0: {
+   
+      textAlign(CENTER, CENTER);
+      
+      // Crosshair info
+      text("THE CROSSHAIRS ARE WHERE YOU ARE AIMING", centre.x, height * 0.4);
+      text("USE THE LEFT STICK TO AIM, AND BUTTON 1 TO SHOOT", centre.x, height * 0.45);
+      text("ENEMIES TURN RED WHEN YOU HAVE THEM IN YOUR SIGHTS", centre.x, height * 0.55);
+      
+      text("PRESS BUTTON 1", centre.x, height * 0.7);
+      
+      break;
+      
+    }
+    
+    case 1: {
+   
+      textAlign(CENTER, CENTER);
+      
+      text("TARGET POWERUPS JUST LIKE ENEMIES, BUT PRESS BUTTON 2 TO COLLECT THEM", centre.x, height * 0.45);
+      text("PURPLE: INCREASE AMMO", centre.x, height * 0.55);
+      text("BLUE: SLOW ENEMY SPAWN RATE", centre.x, height * 0.6);
+      text("GOLD: SLOW ENEMY SPEED", centre.x, height * 0.65);
+      
+      text("PRESS BUTTON 1", centre.x, height * 0.7);
+      
+      break;
+      
+    }
+    
+    case 2: {
+      
+      textAlign(CENTER, CENTER);
+      
+      text("ENEMIES CAN COME FROM ALL DIRECTIONS", centre.x, height * 0.45);
+      text("USE THE RIGHT STICK TO LOOK NORTH, SOUTH, EAST, OR WEST", centre.x, height * 0.5);
+      
+      text("PRESS BUTTON 1", centre.x, height * 0.7);
+      
+      break;
+      
+      
+    }
+    
+    case 3: {
+  
+      // Proximity info
+      textAlign(LEFT, CENTER);
+      
+      directions[0].enemyCount = 0;
+      directions[1].enemyCount = 6;
+      directions[2].enemyCount = 11;
+      directions[3].enemyCount = 1;
+      
+      text("  THE PROXIMITY WARNING SYSTEM ALERTS YOU TO DANGER TO THE NORTH, SOUTH, EAST, AND WEST", hud.points[14].x, height * 0.7);
+      text("  GREY - SAFE, GREEN - >0 ENEMIES, YELLOW - >5 ENEMIES, RED - >10 ENEMIES", hud.points[14].x, height * 0.75);
+      
+      textAlign(CENTER, CENTER);
+      text("PRESS BUTTON 1", centre.x, height * 0.6);
+      
+      break;
+      
+    }
+    
+    default : {
+      
+      textAlign(CENTER, CENTER);
+      
+      text("PRESS START TO RETURN", centre.x, height * 0.45);
+      
+      break;
+      
+    }
+    
+  }
+  
+}
+
 void gamePlay() {
   
   directions[hud.view].display();
@@ -200,7 +295,11 @@ void gamePlay() {
     
   }
   
-  enemySpawnRate -= 0.01f;
+  if(enemySpawnRate > frameRate) {
+    
+    enemySpawnRate -= 0.01f;
+    
+  }
   
 }
 

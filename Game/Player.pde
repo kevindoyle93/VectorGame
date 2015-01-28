@@ -93,11 +93,17 @@ class Player {
       }
       case 1: {
         
+        setupGame();
+        
         if(checkKey(button1)) {
           
           gameMode = 2;
           
-          setupGame();
+        }
+        
+        if(checkKey(button2)) {
+          
+          gameMode = 5;
           
         }
         
@@ -468,6 +474,33 @@ class Player {
           gameMode = 1;
           
         }
+        
+        break;
+        
+      }// end case 4:
+      
+      case 5: {
+        
+        if(checkKey(button1)) {
+          
+          if(pageWait > 10) {
+          
+            page++;
+            pageWait = 0;
+            
+          }
+          
+        }
+        
+        if(checkKey(start)) {
+          
+          gameMode = 1;
+          
+        }
+        
+        pageWait++;
+        
+        break;
         
       }
       

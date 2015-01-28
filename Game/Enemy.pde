@@ -151,16 +151,6 @@ class Enemy extends SpaceObjects {
       
     }
     
-    if(!alive) {
-      
-      // Put something here as a destroyed animation. Like the separate lines falling apart or something
-      
-      //boom.play(0);
-      p.score++;
-      
-      //directions[view].spaceObjects.remove((Enemy)this);
-      
-    }
     
   }
   
@@ -176,23 +166,27 @@ class Enemy extends SpaceObjects {
       
     }
     
-    stroke(130, 255, 80);
-    fill(130, 255, 80);
-    
-    float x = (size / 2.0f / loadTime * progress);
-    float y = (size / 2.0f / loadTime * progress);
-    
-    line(cent.x - size / 2, cent.y - size / 2, cent.x - size / 2 + x, cent.y - size / 2 + y);
-    line(cent.x - size / 2, cent.y + size / 2, cent.x - size / 2 + x, cent.y + size / 2 - y);
-    line(cent.x + size / 2, cent.y - size / 2, cent.x + size / 2 - x, cent.y - size / 2 + y);
-    line(cent.x + size / 2, cent.y + size / 2, cent.x + size / 2 - x, cent.y + size / 2 - y);
-    
-    
-    if(progress > loadTime) {
+    if(view == hud.view) {
       
+      stroke(130, 255, 80);
       fill(130, 255, 80);
       
-      ellipse(cent.x, cent.y, progress % 240, progress % 240);
+      float x = (size / 2.0f / loadTime * progress);
+      float y = (size / 2.0f / loadTime * progress);
+      
+      line(cent.x - size / 2, cent.y - size / 2, cent.x - size / 2 + x, cent.y - size / 2 + y);
+      line(cent.x - size / 2, cent.y + size / 2, cent.x - size / 2 + x, cent.y + size / 2 - y);
+      line(cent.x + size / 2, cent.y - size / 2, cent.x + size / 2 - x, cent.y - size / 2 + y);
+      line(cent.x + size / 2, cent.y + size / 2, cent.x + size / 2 - x, cent.y + size / 2 - y);
+      
+      
+      if(progress > loadTime) {
+        
+        fill(130, 255, 80);
+        
+        ellipse(cent.x, cent.y, progress % 240, progress % 240);
+        
+      }
       
     }
     

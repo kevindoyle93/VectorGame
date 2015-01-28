@@ -93,8 +93,6 @@ class Bullet {
     // Move along that line, decreasing the length of the bullet as it goes
     // Change alive to false if you it hits an enemy or dies
     
-    calculateMovement();
-    
     startPoint.add(movement);
     
     if(l > lDec) {
@@ -133,12 +131,6 @@ class Bullet {
   }
   
   
-  void calculateMovement() {
-    
-    
-  }
-  
-  
   void checkCollision() {
     
     if(check1()) {
@@ -156,29 +148,30 @@ class Bullet {
     
       for(int j = 0; j < directions[i].spaceObjects.size(); j++) {
         
-        if(directions[i].spaceObjects.get(j) instanceof Enemy) {
+        if(directions[i].spaceObjects.get(j) instanceof Enemy && onTarget) {
           
           Enemy temp = (Enemy)directions[i].spaceObjects.get(j);
       
-          if(left) {
+          if(left && temp.lockedOn) {
             
-            if(endPoint.x > (temp.cent.x - (temp.size * 1.5))) {
+            if(temp.cent.x - endPoint.x < temp.size / 2 && (temp.cent.y - endPoint.y < temp.size / 2 && endPoint.y - temp.cent.y < temp.size / 2)) {
               
-              ret = check2(i, j, temp);
+              ret = true;
                 
-              temp.alive = !ret;
+              directions[i].spaceObjects.get(j).alive = !ret;
+              
               return ret;
               
             }
           }
         
-          else {
+          else if(!left && temp.lockedOn) {
             
-            if(endPoint.x < (temp.cent.x + (temp.size * 1.5))) {
+            if(endPoint.x - temp.cent.x < temp.size / 2 && (temp.cent.y - endPoint.y < temp.size / 2 && endPoint.y - temp.cent.y < temp.size / 2)) {
               
-              ret = check2(i, j, temp);
+              ret = true;
                 
-              temp.alive = !ret;
+              directions[i].spaceObjects.get(j).alive = !ret;
               
               return ret;
               
@@ -196,38 +189,6 @@ class Bullet {
   }
   
   
-  boolean check2(int i, int j, Enemy temp) {
-    
-    boolean ret;
-    
-    if(endPoint.y > (temp.cent.y - (temp.size / 2))) {
-      
-      ret = check3(i, j, temp);
-      return ret;
-      
-    }
-    
-    ret = false;
-    return ret;
-    
-  }
-  
-  boolean check3(int i, int j, Enemy temp) {
-    
-    boolean ret;
-    
-    if(endPoint.y < (temp.cent.y + (temp.size / 2))) {
-      
-      ret = true;
-      return ret;
-      
-    }
-    
-    ret = false;
-    return ret;
-    
-  }
-  
   void checkTarget() {
     
     for(int i = 0; i < directions.length; i++) {
@@ -241,6 +202,8 @@ class Bullet {
           if(temp.targeted) {
             
             temp.lockedOn = true;
+            
+            onTarget = true;
             
             break;
             

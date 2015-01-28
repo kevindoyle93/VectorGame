@@ -154,6 +154,8 @@ void startScreen() {
 
 void gamePlay() {
   
+  directions[hud.view].display();
+  
   for(int i = 0; i < directions.length; i++) {
       
       directions[i].update();
@@ -247,7 +249,7 @@ void spawnPowerUps() {
   
     int rand = (int)random(0, 100);
       
-    if(rand < 5) {
+    if(rand < 10) {
       
       int view = (int)random(0, 4);
       

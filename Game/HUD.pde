@@ -43,8 +43,6 @@ class HUD {
   
   void display() {
     
-    directions[view].display();
-    
     stroke(0);
     fill(0);
     

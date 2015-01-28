@@ -70,9 +70,10 @@ class Player {
         
         coolDown = 30;
         
-        score = 10;
+        score = 0;
         
-        health = 100;
+        health = 20;
+        
   }
   
   void update() {
@@ -116,41 +117,6 @@ class Player {
             
             if(directions[i].display) {
             
-              directions[i].cent.add(gameDown);
-              
-              for(int j = 0; j < directions[i].spaceObjects.size(); j++) {
-                
-                if(directions[i].spaceObjects.get(j) instanceof Enemy) {
-                  
-                  Enemy temp = (Enemy)directions[i].spaceObjects.get(j);
-                  temp.cent.add(gameDown);
-                }
-                else {
-                  
-                  directions[i].spaceObjects.get(j).cent.add(gameDown);
-                  
-                }
-                
-              }
-              
-            }
-            
-          }
-          
-          for(int i = 0; i < bullets.size(); i++) {
-            
-            bullets.get(i).startPoint.add(gameDown);
-            bullets.get(i).endPoint.add(gameDown);
-            bullets.get(i).dest.add(gameDown);
-          }
-        }
-        
-        if(checkKey(down)) {
-          
-          for(int i = 0; i < directions.length; i++) {
-            
-            if(directions[i].display) {
-            
               directions[i].cent.add(gameUp);
               
               for(int j = 0; j < directions[i].spaceObjects.size(); j++) {
@@ -176,28 +142,28 @@ class Player {
             
             bullets.get(i).startPoint.add(gameUp);
             bullets.get(i).endPoint.add(gameUp);
+            bullets.get(i).dest.add(gameUp);
           }
-          
         }
         
-        if(checkKey(left)) {
+        if(checkKey(down)) {
           
           for(int i = 0; i < directions.length; i++) {
             
             if(directions[i].display) {
             
-              directions[i].cent.add(gameRight);
+              directions[i].cent.add(gameDown);
               
               for(int j = 0; j < directions[i].spaceObjects.size(); j++) {
                 
                 if(directions[i].spaceObjects.get(j) instanceof Enemy) {
                   
                   Enemy temp = (Enemy)directions[i].spaceObjects.get(j);
-                  temp.cent.add(gameRight);
+                  temp.cent.add(gameDown);
                 }
                 else {
                   
-                  directions[i].spaceObjects.get(j).cent.add(gameRight);
+                  directions[i].spaceObjects.get(j).cent.add(gameDown);
                   
                 }
                 
@@ -209,14 +175,13 @@ class Player {
           
           for(int i = 0; i < bullets.size(); i++) {
             
-            bullets.get(i).startPoint.add(gameRight);
-            bullets.get(i).endPoint.add(gameRight);
-            bullets.get(i).dest.add(gameRight);
+            bullets.get(i).startPoint.add(gameDown);
+            bullets.get(i).endPoint.add(gameDown);
           }
           
-        }    
+        }
         
-        if(checkKey(right)) {
+        if(checkKey(left)) {
           
           for(int i = 0; i < directions.length; i++) {
             
@@ -248,6 +213,42 @@ class Player {
             bullets.get(i).startPoint.add(gameLeft);
             bullets.get(i).endPoint.add(gameLeft);
             bullets.get(i).dest.add(gameLeft);
+          }
+          
+        }    
+        
+        if(checkKey(right)) {
+          
+          for(int i = 0; i < directions.length; i++) {
+            
+            if(directions[i].display) {
+            
+              directions[i].cent.add(gameRight);
+              
+              for(int j = 0; j < directions[i].spaceObjects.size(); j++) {
+                
+                if(directions[i].spaceObjects.get(j) instanceof Enemy) {
+                  
+                  Enemy temp = (Enemy)directions[i].spaceObjects.get(j);
+                  temp.cent.add(gameRight);
+                }
+                else {
+                  
+                  directions[i].spaceObjects.get(j).cent.add(gameRight);
+                  
+                }
+                
+              }
+              
+            }
+            
+          }
+          
+          for(int i = 0; i < bullets.size(); i++) {
+            
+            bullets.get(i).startPoint.add(gameRight);
+            bullets.get(i).endPoint.add(gameRight);
+            bullets.get(i).dest.add(gameRight);
           }
           
         }

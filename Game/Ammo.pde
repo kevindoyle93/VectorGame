@@ -2,6 +2,8 @@ class Ammo extends PowerUp {
   
   float speed;
   
+  int count;
+  
   Ammo(int view) {
     
     cent = new PVector(directions[view].cent.x, directions[view].cent.y);
@@ -12,7 +14,11 @@ class Ammo extends PowerUp {
     
     alive = true;
     
-    speed = 3.0f;
+    speed = 0.5f;
+    
+    count = 0;
+    
+    rand = 20;
     
     move = new PVector[8];
     
@@ -46,11 +52,10 @@ class Ammo extends PowerUp {
   
   void update() {
     
-    int rand = 8;
     
     if(count >= 90) {
       
-      rand = (int)random(0, 20);
+      rand = (int)random(0, 11);
       
       count = 0;
       

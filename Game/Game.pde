@@ -114,6 +114,8 @@ void draw() {
   
 }
 
+boolean setUp;
+
 void setupGame() {
   
   p.score = 0;
@@ -141,6 +143,8 @@ void setupGame() {
     letter[i] = 'A';
     
   }
+  
+  setUp = true;
   
 }
 
@@ -296,7 +300,7 @@ void gamePlay() {
       
       if(directions[i].spaceObjects.get(j) instanceof Enemy) {
       
-        directions[i].spaceObjects.get(j).speed += 0.005f;
+        directions[i].spaceObjects.get(j).speed += 0.003f;
         
       }
       
@@ -306,7 +310,7 @@ void gamePlay() {
   
   if(enemySpawnRate > frameRate) {
     
-    enemySpawnRate -= 0.01f;
+    enemySpawnRate -= 0.005f;
     
   }
   
@@ -397,9 +401,14 @@ void spawnPowerUps() {
       directions[view].addPowerUp(1);
       
     }
-    else if(rand < 17) {
+    else if(rand < 18) {
       
       directions[view].addPowerUp(2);
+      
+    }
+    else if(rand < 21) {
+      
+      directions[view].addPowerUp(3);
       
     }
     

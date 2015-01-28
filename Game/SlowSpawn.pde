@@ -1,9 +1,5 @@
 class SlowSpawn extends PowerUp {
   
-  float speed;
-  
-  int count;
-  
   SlowSpawn(int view) {
     
     super();

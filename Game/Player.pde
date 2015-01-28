@@ -93,7 +93,11 @@ class Player {
       }
       case 1: {
         
-        setupGame();
+        if(!setUp) {
+          
+          setupGame();
+          
+        }
         
         if(checkKey(button1)) {
           
@@ -121,6 +125,12 @@ class Player {
         if(checkKey(up)) {
             
           directions[hud.view].cent.add(gameUp);
+          
+          for(int i = 0; i < directions[hud.view].stars.size(); i++) {
+            
+            directions[hud.view].stars.get(i).cent.add(gameUp);
+            
+          }
           
           for(int i = 0; i < directions[hud.view].spaceObjects.size(); i++) {
             
@@ -151,6 +161,12 @@ class Player {
           
           directions[hud.view].cent.add(gameDown);
           
+          for(int i = 0; i < directions[hud.view].stars.size(); i++) {
+            
+            directions[hud.view].stars.get(i).cent.add(gameDown);
+            
+          }
+          
           for(int i = 0; i < directions[hud.view].spaceObjects.size(); i++) {
             
             if(directions[hud.view].spaceObjects.get(i) instanceof Enemy) {
@@ -180,6 +196,12 @@ class Player {
           
           directions[hud.view].cent.add(gameLeft);
           
+          for(int i = 0; i < directions[hud.view].stars.size(); i++) {
+            
+            directions[hud.view].stars.get(i).cent.add(gameLeft);
+            
+          }
+          
           for(int i = 0; i < directions[hud.view].spaceObjects.size(); i++) {
             
             if(directions[hud.view].spaceObjects.get(i) instanceof Enemy) {
@@ -208,6 +230,12 @@ class Player {
         if(checkKey(right)) {
           
           directions[hud.view].cent.add(gameRight);
+          
+          for(int i = 0; i < directions[hud.view].stars.size(); i++) {
+            
+            directions[hud.view].stars.get(i).cent.add(gameRight);
+            
+          }
           
           for(int i = 0; i < directions[hud.view].spaceObjects.size(); i++) {
             
@@ -270,6 +298,11 @@ class Player {
                 if(directions[hud.view].spaceObjects.get(i) instanceof Ammo) {
                   
                   p.ammo = 40;
+                  
+                }
+                else if(directions[hud.view].spaceObjects.get(i) instanceof Health) {
+                  
+                  p.health += 30;
                   
                 }
                 else if(directions[hud.view].spaceObjects.get(i) instanceof SlowSpeed) {
@@ -495,6 +528,8 @@ class Player {
         }
         
         if(checkKey(start)) {
+          
+          setUp = false;
           
           gameMode = 1;
           

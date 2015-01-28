@@ -1,10 +1,6 @@
 class Ammo extends PowerUp {
   
-  float speed;
-  
-  int count;
-  
-  Ammo(int view) {
+  Ammo() {
     
     super();
     

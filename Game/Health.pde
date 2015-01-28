@@ -1,12 +1,12 @@
-class SlowSpeed extends PowerUp {
+class Health extends PowerUp {
   
-  SlowSpeed(int view) {
+  Health() {
     
     super();
     
-    size = width / 80;
+    size = width / 50;
     
-    colour = color(255, 162, 59);
+    colour = color(236, 93, 78);
     
   }
   
@@ -23,7 +23,7 @@ class SlowSpeed extends PowerUp {
       
     }
     
-    colour = color(255, 162, 59);
+    colour = color(236, 93, 78);
     
   }
   

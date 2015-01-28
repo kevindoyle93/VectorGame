@@ -1,6 +1,10 @@
-class Star extends SpaceObjects {
+class Star {
+  
+  PVector cent;
   
   float theta, thetaInc;
+  
+  float size;
   
   int points;
   
@@ -13,17 +17,7 @@ class Star extends SpaceObjects {
     
     points = 5;
     
-    size = random(width * 0.003, width * 0.0013);
-    
-    alive = true;
-    
-  }
-  
-  Star(int view) {
-    
-    this();
-    
-    this.view = view;
+    size = random(width * 0.001, width * 0.01);
     
   }
   

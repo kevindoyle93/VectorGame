@@ -6,6 +6,8 @@ class PowerUp extends SpaceObjects {
   
   int count;
   
+  float speed;
+  
   PowerUp() {
     
     speed = 0.5f;

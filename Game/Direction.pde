@@ -10,6 +10,8 @@ class Direction {
   
   ArrayList<SpaceObjects> spaceObjects;
   
+  ArrayList<Star> stars;
+  
   
   Direction(int view) {
     
@@ -23,11 +25,19 @@ class Direction {
     
     spaceObjects = new ArrayList<SpaceObjects>();
     
+    stars = new ArrayList<Star>();
+    
     makeBackground();
     
   }
   
   void display() {
+    
+    for(int i = 0; i < stars.size(); i++) {
+      
+      stars.get(i).display();
+      
+    }
 
     for(int i = 0; i < spaceObjects.size(); i++) {
       
@@ -38,6 +48,12 @@ class Direction {
   }
   
   void update() {
+    
+    for(int i = 0; i < stars.size(); i++) {
+      
+      stars.get(i).update();
+      
+    }
     
     for(int i = 0; i < spaceObjects.size(); i++) {
       
@@ -51,9 +67,9 @@ class Direction {
   
   void makeBackground() {
     
-    for(int i = 0; i < width / 3; i++) {
+    for(int i = 0; i < width / 20; i++) {
       
-      spaceObjects.add(new Star(view));
+      stars.add(new Star());
       
     }
     
@@ -97,17 +113,22 @@ class Direction {
     
     if(type == 0) {
       
-      spaceObjects.add(new Ammo(view));
+      spaceObjects.add(new Ammo());
       
     }
     else if(type == 1) {
       
-      spaceObjects.add(new SlowSpeed(view));
+      spaceObjects.add(new Health());
       
     }
     else if(type == 2) {
       
-      spaceObjects.add(new SlowSpawn(view));
+      spaceObjects.add(new SlowSpeed());
+      
+    }
+    else if(type == 3) {
+      
+      spaceObjects.add(new SlowSpawn());
       
     }
     

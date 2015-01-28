@@ -20,9 +20,11 @@ class Bullet {
   
   boolean onTarget;    // whether or not a bullet, when shot, is on target to hit an enemy
   
+  int view;
+  
   Bullet(boolean left) {
     
-    speed = 20.0f;
+    speed = 30.0f;
     
     if(left) {
       
@@ -51,25 +53,31 @@ class Bullet {
     
     lDec = speed / 10.0f;
     
+    view = hud.view;
+    
     checkTarget();
     
   }
   
   void display() {
     
-    stroke(255, 0, 0);
-    fill(255, 0, 0);
+    if(view == hud.view) {
     
-    if(left) {
+      stroke(255, 0, 0);
+      fill(255, 0, 0);
       
-      endPoint.x = startPoint.x + l;
-    }
-    else {
+      if(left) {
+        
+        endPoint.x = startPoint.x + l;
+      }
+      else {
+        
+        endPoint.x = startPoint.x - l;
+      }
       
-      endPoint.x = startPoint.x - l;
+      line(startPoint.x, startPoint.y, endPoint.x, endPoint.y);
+      
     }
-    
-    line(startPoint.x, startPoint.y, endPoint.x, endPoint.y);
     
   }
   

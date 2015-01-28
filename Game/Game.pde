@@ -44,8 +44,6 @@ void setup() {
   
   hud = new HUD(centre.x, centre.y);
   
-  //bullets = new ArrayList<Bullet>();
-  
   directions = new Direction[4];
   
   myFont = createFont("Rod", 20);
@@ -187,6 +185,23 @@ void gamePlay() {
   
   spawnEnemies();
   spawnPowerUps();
+  
+  for(int i = 0; i < directions.length; i++) {
+    
+    for(int j = 0; j < directions[i].spaceObjects.size(); j++) {
+      
+      if(directions[i].spaceObjects.get(j) instanceof Enemy) {
+      
+        directions[i].spaceObjects.get(j).speed += 0.005f;
+        
+      }
+      
+    }
+    
+  }
+  
+  enemySpawnRate -= 0.01f;
+  
 }
 
 boolean onTable;

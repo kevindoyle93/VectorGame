@@ -135,9 +135,17 @@ class Direction {
     
   }
   
-  void addPowerUp() {
+  void addPowerUp(int type) {
     
-    spaceObjects.add(new Ammo(view));
+    if(type == 0) {
+      spaceObjects.add(new Ammo(view));
+    }
+    else if(type == 1) {
+      spaceObjects.add(new SlowSpeed(view));
+    }
+    else if(type == 2) {
+      spaceObjects.add(new SlowSpawn(view));
+    }
     
   }
   

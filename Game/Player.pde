@@ -274,11 +274,52 @@ class Player {
             
           }
         }
-          
+        
         if(checkKey(button2)) {
           
-          gun.ammo = 40;
-          coolDown = -20;
+          for(int i = 0; i < directions[hud.view].spaceObjects.size(); i++) {
+            
+            if(directions[hud.view].spaceObjects.get(i) instanceof PowerUp) {
+              
+              PowerUp temp = (PowerUp)directions[hud.view].spaceObjects.get(i);
+              
+              if(temp.cent.x - centre.x < temp.size / 2 && centre.x - temp.cent.x < temp.size / 2 && temp.cent.y - centre.y < temp.size / 2 && centre.y - temp.cent.y < temp.size / 2) { 
+              
+                if(directions[hud.view].spaceObjects.get(i) instanceof Ammo) {
+                  
+                  gun.ammo = 40;
+                  
+                }
+                else if(directions[hud.view].spaceObjects.get(i) instanceof SlowSpeed) {
+                  
+                  for(int j = 0; j < directions.length; j++) {
+                    
+                    for(int k = 0; k < directions[j].spaceObjects.size(); k++) {
+                      
+                      if(directions[j].spaceObjects.get(k) instanceof Enemy) {
+                        
+                        directions[j].spaceObjects.get(k).speed = 0.5f;
+                        
+                      }
+                      
+                    }
+                    
+                  }
+                  
+                }
+                else if(directions[hud.view].spaceObjects.get(i) instanceof SlowSpawn) {
+                  
+                  enemySpawnRate = 150;
+                  
+                }
+                
+                directions[hud.view].spaceObjects.remove(i);
+                
+              }
+              
+            }
+            
+          }
           
         }
         

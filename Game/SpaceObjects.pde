@@ -12,6 +12,8 @@ class SpaceObjects {
   
   boolean alive;
   
+  float speed;
+  
   void display(){
     
   }

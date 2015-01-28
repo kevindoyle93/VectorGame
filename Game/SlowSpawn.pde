@@ -1,16 +1,16 @@
-class Ammo extends PowerUp {
+class SlowSpawn extends PowerUp {
   
   float speed;
   
   int count;
   
-  Ammo(int view) {
+  SlowSpawn(int view) {
     
     cent = new PVector(directions[view].cent.x, directions[view].cent.y);
     
-    size = width / 50;
+    size = width / 70;
     
-    colour = color(141, 77, 137);
+    colour = color(133, 183, 223);
     
     alive = true;
     
@@ -42,11 +42,11 @@ class Ammo extends PowerUp {
       
       ellipse(cent.x, cent.y, i, i);
       
-      colour = color(red(colour) + 5, green(colour) + 5, blue(colour) + 5);
+      colour = color(red(colour) - 5, green(colour) - 5, blue(colour) - 5);
       
     }
     
-    colour = color(141, 77, 137);
+    colour = color(133, 183, 223);
     
   }
   

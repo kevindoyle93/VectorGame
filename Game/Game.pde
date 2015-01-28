@@ -49,8 +49,6 @@ void setup() {
   myFont = createFont("Rod", 20);
   textFont(myFont);
   
-  spawnRate = 60;
-  
   gameMode = 0;
   
 }
@@ -110,6 +108,9 @@ void setupGame() {
   p.score = 0;
   p.health = 100;
   p.coolDown = 0;
+  
+  enemySpawnRate = 120;
+  enemySpawn = 60;
   
   bullets = new ArrayList<Bullet>();
   
@@ -240,19 +241,19 @@ void displayHighScores() {
 } 
 
 
-int spawnRate;
+float enemySpawnRate, enemySpawn;
 
 void spawnEnemies() {
   
-  if(spawnRate > frameRate * 1.5f) {
+  if(enemySpawnRate < enemySpawn) {
     
     int rand = (int)random(0, 4);
     
     directions[rand].addEnemy();
-    spawnRate = 0;
+    enemySpawn = 0;
   }
   
-  spawnRate++;
+  enemySpawn++;
   
 }
 
@@ -261,12 +262,22 @@ void spawnPowerUps() {
   if(frameCount % 60 == 0) {
   
     int rand = (int)random(0, 100);
+    
+    int view = (int)random(0, 4);
       
     if(rand < 10) {
       
-      int view = (int)random(0, 4);
+      directions[view].addPowerUp(0);
       
-      directions[view].addPowerUp();
+    }
+    else if(rand < 15) {
+      
+      directions[view].addPowerUp(1);
+      
+    }
+    else if(rand < 17) {
+      
+      directions[view].addPowerUp(2);
       
     }
     

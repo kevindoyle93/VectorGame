@@ -1,3 +1,7 @@
+// PROXIMITY
+// 
+// written by Kevin Doyle (C13547287), 2015
+
 class Player {
   
   int health, score, ammo;
@@ -122,8 +126,8 @@ class Player {
           
         }
     
-        if(checkKey(up)) {
-            
+        if(checkKey(up)) { 
+         
           directions[hud.view].cent.add(gameUp);
           
           for(int i = 0; i < directions[hud.view].stars.size(); i++) {

@@ -1,3 +1,7 @@
+// PROXIMITY
+// 
+// written by Kevin Doyle (C13547287), 2015
+
 class Health extends PowerUp {
   
   Health() {

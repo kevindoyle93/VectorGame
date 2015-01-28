@@ -1,3 +1,13 @@
+// PROXIMITY
+// 
+// written by Kevin Doyle (C13547287), 2015
+//
+// This is a twin stick shooter designed for an arcade cabinet. The left stick controls where the player looks/aims
+// while the right stick is used to look north, south, east, or west, as enemies can come at you from all directions.
+// There is no win scenario, and as such it is an endless runner where the objective is simply to get the highest score.
+// This becomes difficult as the enemy speed and rate at which they spawn increase as time goes on. Enjoy playing!
+
+
 import ddf.minim.spi.*;
 import ddf.minim.signals.*;
 import ddf.minim.*;
@@ -17,9 +27,9 @@ AudioPlayer powerUp;
 PVector centre;
 int gameMode;
 boolean[] keys = new boolean[526];
-Player p;
 PFont myFont;
 
+Player p;
 
 Direction[] directions;
 
@@ -530,7 +540,7 @@ void addToScores() {
   }
   
   highScores.add(new Score(name, p.score));
-  sortScores();
+  sortScores();                                // Scores are re-sorted to ensure they are written to the .txt file in the correct order
   
   highScores.remove(highScores.size() - 1);
   

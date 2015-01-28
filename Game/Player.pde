@@ -247,7 +247,7 @@ class Player {
               bullets.add(new Bullet(false));
             }
             
-            gunSound.play(0);
+            playerShoot.play(0);
             count++;
             p.ammo--;
             coolDown = 0;
@@ -264,6 +264,8 @@ class Player {
               PowerUp temp = (PowerUp)directions[hud.view].spaceObjects.get(i);
               
               if(temp.cent.x - centre.x < temp.size / 2 && centre.x - temp.cent.x < temp.size / 2 && temp.cent.y - centre.y < temp.size / 2 && centre.y - temp.cent.y < temp.size / 2) { 
+                
+                powerUp.play(0);
               
                 if(directions[hud.view].spaceObjects.get(i) instanceof Ammo) {
                   

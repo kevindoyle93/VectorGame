@@ -76,9 +76,12 @@ class Direction {
         
         if(spaceObjects.get(i) instanceof Enemy) {
           
+          enemyHit.play(0);
+          
           p.score++;
           
         }
+        
         
         spaceObjects.remove(spaceObjects.get(i));
         

@@ -8,8 +8,11 @@ import ddf.minim.effects.*;
 // Audio
 Minim minim;
 AudioPlayer backgroundMusic;
-AudioPlayer gunSound;
-AudioPlayer boom;
+AudioPlayer playerShoot;
+AudioPlayer playerHit;
+AudioPlayer enemyShoot;
+AudioPlayer enemyHit;
+AudioPlayer powerUp;
 
 PVector centre;
 int gameMode;
@@ -33,10 +36,16 @@ void setup() {
   
   // Load music/sounds
   minim = new Minim(this);
-  backgroundMusic = minim.loadFile("bgm.mp3");
-  //backgroundMusic.loop();
-  gunSound = minim.loadFile("laser.mp3");
-  boom = minim.loadFile("boom.mp3");
+  
+//  backgroundMusic = minim.loadFile("bgm.mp3");
+//  backgroundMusic.loop();
+  
+  
+  playerShoot = minim.loadFile("/sounds/PlayerShoot.wav");
+  playerHit = minim.loadFile("/sounds/PlayerHit.wav");
+  enemyShoot = minim.loadFile("/sounds/EnemyShoot.wav");
+  enemyHit = minim.loadFile("/sounds/EnemyHit.wav");
+  powerUp = minim.loadFile("/sounds/Powerup.wav");
   
   size(900, 500);
   

@@ -190,6 +190,8 @@ class Enemy extends SpaceObjects {
     
     if(coolDown > 120) {
       
+      enemyShoot.play(0);
+      
       loaded = false;
       
       coolDown = 0;
@@ -199,6 +201,8 @@ class Enemy extends SpaceObjects {
       int hit = (int)random(1, 101);
       
       if(hit < chance) {
+        
+        playerHit.play(0);
         
         p.health -= 10;
         

@@ -1,6 +1,6 @@
 class SlowSpeed extends PowerUp {
   
-  SlowSpeed(int view) {
+  SlowSpeed() {
     
     super();
     

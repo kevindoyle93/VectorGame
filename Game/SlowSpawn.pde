@@ -1,6 +1,6 @@
 class SlowSpawn extends PowerUp {
   
-  SlowSpawn(int view) {
+  SlowSpawn() {
     
     super();
     

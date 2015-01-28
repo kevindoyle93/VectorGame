@@ -37,9 +37,8 @@ void setup() {
   // Load music/sounds
   minim = new Minim(this);
   
-//  backgroundMusic = minim.loadFile("bgm.mp3");
-//  backgroundMusic.loop();
-  
+  backgroundMusic = minim.loadFile("Game.wav");
+  backgroundMusic.loop();
   
   playerShoot = minim.loadFile("/sounds/PlayerShoot.wav");
   playerHit = minim.loadFile("/sounds/PlayerHit.wav");
@@ -228,7 +227,7 @@ void instructions() {
       textAlign(CENTER, CENTER);
       
       text("ENEMIES CAN COME FROM ALL DIRECTIONS", centre.x, height * 0.45);
-      text("USE THE RIGHT STICK TO LOOK NORTH, SOUTH, EAST, OR WEST", centre.x, height * 0.5);
+      text("USE THE RIGHT STICK TO LOOK NORTH, SOUTH, EAST, OR WEST", centre.x, height * 0.55);
       
       text("PRESS BUTTON 1", centre.x, height * 0.7);
       
@@ -310,7 +309,7 @@ void gamePlay() {
   
   if(enemySpawnRate > frameRate) {
     
-    enemySpawnRate -= 0.005f;
+    enemySpawnRate -= 0.003f;
     
   }
   

@@ -439,50 +439,7 @@ void spawnPowerUps() {
 }
 
 
-void keyPressed()
-{
-  keys[keyCode] = true;
-}
-
-void keyReleased()
-{
-  keys[keyCode] = false;
-}
-
-boolean checkKey(char theKey)
-{
-  return keys[Character.toUpperCase(theKey)];
-}
-
-
-char buttonNameToKey(XML xml, String buttonName)
-{
-  String value =  xml.getChild(buttonName).getContent();
-  if ("LEFT".equalsIgnoreCase(value))
-  {
-    return LEFT;
-  }
-  if ("RIGHT".equalsIgnoreCase(value))
-  {
-    return RIGHT;
-  }
-  if ("UP".equalsIgnoreCase(value))
-  {
-    return UP;
-  }
-  if ("DOWN".equalsIgnoreCase(value))
-  {
-    return DOWN;
-  }
-  
-  return value.charAt(0);  
-}
-
 void setUpController() {
-  
-  XML xml = loadXML("arcade.xml");
-  
-  XML playerXML = xml.getChild("player");
   
   p = new Player();
   

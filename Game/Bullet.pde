@@ -6,7 +6,7 @@ class Bullet {
   
   PVector startPoint;  // start of bullet
   
-  PVector dest;        // destination of bullet
+  PVector dest;;       // destination of bullet
   
   PVector endPoint;    // end of bullet
   

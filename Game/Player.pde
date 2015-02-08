@@ -172,7 +172,16 @@ class Player {
                 }
                 else if(directions[hud.view].spaceObjects.get(i) instanceof Health) {
                   
-                  p.health += 30;
+                  if(p.health < 70) {
+                  
+                    p.health += 30;
+                    
+                  }
+                  else {
+                   
+                    p.health = 100;
+                    
+                  }
                   
                 }
                 else if(directions[hud.view].spaceObjects.get(i) instanceof SlowSpeed) {
@@ -327,13 +336,13 @@ class Player {
               
             }
             
-            if(rightStick.getY() < -0.5f && textChoice > 0) {
+            if(leftStick.getY() < -0.5f && textChoice > 0) {
               
               textChoice--;
               
             }
             
-            if(rightStick.getY() > 0.5f && textChoice < 2) {
+            if(leftStick.getY() > 0.5f && textChoice < 2) {
               
               textChoice++;
               

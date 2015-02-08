@@ -10,73 +10,45 @@ class Player {
   
   int count, coolDown;
   
-  char up;
-  char down;
-  char left;
-  char right;
-  char start;
-  char button1;
-  char button2;
-  char north;
-  char south;
-  char east;
-  char west;
-  char button3;
-  char button4;
+  ControllStick leftStick;
+  ControllStick rightStick;
+  ControllButton button1;
+  ControllButton button2;
+  ControllButton button3;
+  ControllButton button4;
+  ControllButton start;
   
-  PVector gameUp, gameDown, gameLeft, gameRight;
+  PVector movement;
   
-  Player(char up, char down, char left, char right, char start, char button1, char button2, char north, char south, char east, char west, char button3, char button4) {
-        
-    this.up = up;
-    this.down = down;
-    this.left = left;
-    this.right = right;
-    this.start = start;
-    this.button1 = button1;
-    this.button2 = button2;
-    this.north = north;
-    this.south = south;
-    this.east = east;
-    this.west = west;
-    this.button3 = button3;
-    this.button4 = button4;
+  Player() {
     
-  }
-  
-  Player(XML xml) {
+    ControllSlider sliderX = device.getSlider(0);
+    ControllSlider sliderY = device.getSlider(1);
     
-    this(buttonNameToKey(xml, "up"), 
-         buttonNameToKey(xml, "down"), 
-         buttonNameToKey(xml, "left"), 
-         buttonNameToKey(xml, "right"), 
-         buttonNameToKey(xml, "start"), 
-         buttonNameToKey(xml, "button1"), 
-         buttonNameToKey(xml, "button2"), 
-         buttonNameToKey(xml, "north"), 
-         buttonNameToKey(xml, "south"), 
-         buttonNameToKey(xml, "west"), 
-         buttonNameToKey(xml, "east"), 
-         buttonNameToKey(xml, "button3"), 
-         buttonNameToKey(xml, "button4")
-        );
+    leftStick = new ControllStick(sliderX, sliderY);
+    
+    sliderX = device.getSlider(2);
+    sliderY = device.getSlider(3);
+    
+    rightStick = new ControllStick(sliderX, sliderY);
+    
+    button1 = device.getButton("Button 0");
+    button2 = device.getButton("Button 1");
+    start = device.getButton("Button 7");
         
-        speed = 2.0f;
-        
-        gameUp = new PVector(0, -speed);
-        gameDown = new PVector(0, speed);
-        gameLeft = new PVector(-speed, 0);
-        gameRight = new PVector(speed, 0);
-        
-        coolDown = 30;
-        
-        count = 0;
-        
-        score = 0;
-        
-        health = 100;
-        
-        ammo = 40;
+    speed = 2.0f;
+    
+    movement = new PVector(0, 0);
+    
+    coolDown = 30;
+    
+    count = 0;
+    
+    score = 0;
+    
+    health = 100;
+    
+    ammo = 40;
         
   }
   
@@ -86,7 +58,7 @@ class Player {
       
       case 0: {
         
-        if(checkKey(start)) {
+        if(start.pressed()) {
            
           gameMode = 1;
             
@@ -103,13 +75,14 @@ class Player {
           
         }
         
-        if(checkKey(button1)) {
+        if(button1.pressed()) {
           
+          setupGame();
           gameMode = 2;
           
         }
         
-        if(checkKey(button2)) {
+        if(button2.pressed()) {
           
           gameMode = 5;
           
@@ -125,148 +98,41 @@ class Player {
           gameMode = 3;
           
         }
-    
-        if(checkKey(up)) { 
-         
-          directions[hud.view].cent.add(gameUp);
           
-          for(int i = 0; i < directions[hud.view].stars.size(); i++) {
+        movement.set((float)leftStick.getY(), (float)leftStick.getX());
+        
+        directions[hud.view].cent.sub(movement);
+        
+        for(int i = 0; i < directions[hud.view].stars.size(); i++) {
+          
+          directions[hud.view].stars.get(i).cent.sub(movement);
+          
+        }
+        
+        for(int i = 0; i < directions[hud.view].spaceObjects.size(); i++) {
+          
+          if(directions[hud.view].spaceObjects.get(i) instanceof Enemy) {
             
-            directions[hud.view].stars.get(i).cent.add(gameUp);
-            
+            Enemy temp = (Enemy)directions[hud.view].spaceObjects.get(i);
+            temp.cent.sub(movement);
           }
-          
-          for(int i = 0; i < directions[hud.view].spaceObjects.size(); i++) {
+          else {
             
-            if(directions[hud.view].spaceObjects.get(i) instanceof Enemy) {
-              
-              Enemy temp = (Enemy)directions[hud.view].spaceObjects.get(i);
-              temp.cent.add(gameUp);
-            }
-            else {
-              
-              directions[hud.view].spaceObjects.get(i).cent.add(gameUp);
-              
-            }
-            
-          }
-          
-          for(int i = 0; i < bullets.size(); i++) {
-            
-            bullets.get(i).startPoint.add(gameUp);
-            bullets.get(i).endPoint.add(gameUp);
-            bullets.get(i).dest.add(gameUp);
+            directions[hud.view].spaceObjects.get(i).cent.sub(movement);
             
           }
           
         }
         
-        if(checkKey(down)) {
+        for(int i = 0; i < bullets.size(); i++) {
           
-          directions[hud.view].cent.add(gameDown);
-          
-          for(int i = 0; i < directions[hud.view].stars.size(); i++) {
-            
-            directions[hud.view].stars.get(i).cent.add(gameDown);
-            
-          }
-          
-          for(int i = 0; i < directions[hud.view].spaceObjects.size(); i++) {
-            
-            if(directions[hud.view].spaceObjects.get(i) instanceof Enemy) {
-              
-              Enemy temp = (Enemy)directions[hud.view].spaceObjects.get(i);
-              temp.cent.add(gameDown);
-            }
-            else {
-              
-              directions[hud.view].spaceObjects.get(i).cent.add(gameDown);
-              
-            }
-            
-          }
-          
-          for(int i = 0; i < bullets.size(); i++) {
-            
-            bullets.get(i).startPoint.add(gameDown);
-            bullets.get(i).endPoint.add(gameDown);
-            bullets.get(i).dest.add(gameDown);
-            
-          }
+          bullets.get(i).startPoint.sub(movement);
+          bullets.get(i).endPoint.sub(movement);
+          bullets.get(i).dest.sub(movement);
           
         }
         
-        if(checkKey(left)) {
-          
-          directions[hud.view].cent.add(gameLeft);
-          
-          for(int i = 0; i < directions[hud.view].stars.size(); i++) {
-            
-            directions[hud.view].stars.get(i).cent.add(gameLeft);
-            
-          }
-          
-          for(int i = 0; i < directions[hud.view].spaceObjects.size(); i++) {
-            
-            if(directions[hud.view].spaceObjects.get(i) instanceof Enemy) {
-              
-              Enemy temp = (Enemy)directions[hud.view].spaceObjects.get(i);
-              temp.cent.add(gameLeft);
-            }
-            else {
-              
-              directions[hud.view].spaceObjects.get(i).cent.add(gameLeft);
-              
-            }
-            
-          }
-          
-          for(int i = 0; i < bullets.size(); i++) {
-            
-            bullets.get(i).startPoint.add(gameLeft);
-            bullets.get(i).endPoint.add(gameLeft);
-            bullets.get(i).dest.add(gameLeft);
-            
-          }
-          
-        }    
-        
-        if(checkKey(right)) {
-          
-          directions[hud.view].cent.add(gameRight);
-          
-          for(int i = 0; i < directions[hud.view].stars.size(); i++) {
-            
-            directions[hud.view].stars.get(i).cent.add(gameRight);
-            
-          }
-          
-          for(int i = 0; i < directions[hud.view].spaceObjects.size(); i++) {
-            
-            if(directions[hud.view].spaceObjects.get(i) instanceof Enemy) {
-              
-              Enemy temp = (Enemy)directions[hud.view].spaceObjects.get(i);
-              temp.cent.add(gameRight);
-            }
-            else {
-              
-              directions[hud.view].spaceObjects.get(i).cent.add(gameRight);
-              
-            }
-            
-          }
-          
-          for(int i = 0; i < bullets.size(); i++) {
-            
-            bullets.get(i).startPoint.add(gameRight);
-            bullets.get(i).endPoint.add(gameRight);
-            bullets.get(i).dest.add(gameRight);
-            
-          }
-          
-        }
-        
-        if(checkKey(button1)) {
+        if(button1.pressed()) {
           
           if(coolDown > 10 && p.ammo > 0) {
           
@@ -287,7 +153,7 @@ class Player {
           }
         }
         
-        if(checkKey(button2)) {
+        if(button2.pressed()) {
           
           for(int i = 0; i < directions[hud.view].spaceObjects.size(); i++) {
             
@@ -342,7 +208,7 @@ class Player {
           
         }
         
-        if(checkKey(north)) {
+        if(rightStick.getX() > 0.5f) {
           
           hud.view = 0;
           
@@ -366,7 +232,7 @@ class Player {
           
         }
         
-        if(checkKey(south)) {
+        if(rightStick.getX() < -0.5f) {
           
           hud.view = 1;
           
@@ -390,7 +256,7 @@ class Player {
           
         }
         
-        if(checkKey(west)) {
+        if(rightStick.getY() > 0.5f) {
           
           hud.view = 2;
           
@@ -414,7 +280,7 @@ class Player {
           
         }
         
-        if(checkKey(east)) {
+        if(rightStick.getY() < -0.5f) {
           
           hud.view = 3;
           
@@ -449,31 +315,31 @@ class Player {
           
           if(textWait > 10) {
           
-            if(checkKey(up) && letter[textChoice] < 'Z') {
+            if(leftStick.getX() > 0.5f && letter[textChoice] < 'Z') {
               
               letter[textChoice]++;
               
             }
             
-            if(checkKey(down) && letter[textChoice] > 'A') {
+            if(leftStick.getX() < -0.5f && letter[textChoice] > 'A') {
               
               letter[textChoice]--;
               
             }
             
-            if(checkKey(left) && textChoice > 0) {
+            if(rightStick.getY() < -0.5f && textChoice > 0) {
               
               textChoice--;
               
             }
             
-            if(checkKey(right) && textChoice < 2) {
+            if(rightStick.getY() > 0.5f && textChoice < 2) {
               
               textChoice++;
               
             }
             
-            if(checkKey(button1)){
+            if(button1.pressed()){
               
               addToScores();
               
@@ -488,13 +354,13 @@ class Player {
         }
         else {
           
-          if(checkKey(start)) {
+          if(start.pressed()) {
             
             gameMode = 1;
             
           }
           
-          if(checkKey(button2)) {
+          if(button2.pressed()) {
             
             gameMode = 4;
             
@@ -508,7 +374,7 @@ class Player {
       
       case 4: {
         
-        if(checkKey(start)){
+        if(start.pressed()){
           
           gameMode = 1;
           
@@ -520,7 +386,7 @@ class Player {
       
       case 5: {
         
-        if(checkKey(button1)) {
+        if(button1.pressed()) {
           
           if(pageWait > 10) {
           
@@ -531,7 +397,7 @@ class Player {
           
         }
         
-        if(checkKey(start)) {
+        if(start.pressed()) {
           
           setUp = false;
           

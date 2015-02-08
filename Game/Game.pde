@@ -15,6 +15,9 @@ import ddf.minim.analysis.*;
 import ddf.minim.ugens.*;
 import ddf.minim.effects.*;
 
+import procontroll.*;
+import net.java.games.input.*;
+
 // Audio
 Minim minim;
 AudioPlayer backgroundMusic;
@@ -23,6 +26,10 @@ AudioPlayer playerHit;
 AudioPlayer enemyShoot;
 AudioPlayer enemyHit;
 AudioPlayer powerUp;
+
+// Controller
+ControllIO controll;
+ControllDevice device;
 
 PVector centre;
 int gameMode;
@@ -39,6 +46,12 @@ ArrayList<Bullet> bullets;
 
 
 void setup() {
+  
+  // set up controller
+  controll = ControllIO.getInstance(this);
+
+  device = controll.getDevice("Controller (Gamepad for Xbox 360)");
+  device.setTolerance(0.05f);
   
   setUpController();
   
@@ -471,7 +484,7 @@ void setUpController() {
   
   XML playerXML = xml.getChild("player");
   
-  p = new Player(playerXML);
+  p = new Player();
   
 }
 
@@ -513,10 +526,10 @@ void readName() {
   
   for(int i = 0; i < letter.length; i++) {
     
-    if(textChoice == i){
+    if(textChoice == i) {
       stroke(0, 255, 0);
     }
-    else{
+    else {
       stroke(200);
     }
     
